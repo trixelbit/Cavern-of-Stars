@@ -9,69 +9,41 @@ public class SpriteRenderer : MonoBehaviour
     public GameObject Parent;
 
 
-    // sprites
-    public float idle_framecount = 1;
-    public float idle_speed;
-
-
+    // sprites sets
     public OctaSpriteSet idle;
     public OctaSpriteSet run;
+    public OctaSpriteSet dash;
+    public OctaSpriteSet slash;
 
-    Renderer rend;
+    Renderer Rend;
     Sprite sprite;
-    State playerState;
+    State CharacterState;
     Direction direction;
 
     void Start()
     {
-
-
-        rend = GetComponent<Renderer>();
-        playerState = Parent.transform.GetComponent<movement>().playerState;
-        direction = Parent.transform.GetComponent<movement>().runDirection;
-        sprite = new Sprite(rend, 1, 1);
-
-
+        Rend = GetComponent<Renderer>();
+        CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
+        direction = Parent.transform.GetComponent<movement>().Direction;
+        sprite = new Sprite(Rend, 1, 1);
     }
 
     void Update()
     {
-        playerState = Parent.transform.GetComponent<movement>().playerState;
+        CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
 
-        if (playerState == State.idle)
+        if (CharacterState == State.idle)
         {
-            //sprite.ImageSpeed = run_speed;
-            sprite.FrameCount = 1;
-
+            sprite.UpdateSprite(idle.SpriteMaterials[(int)direction], idle.FrameCount, idle.ImageSpeed);
 
         }
-        else if (playerState == State.running)
+        else if (CharacterState == State.running)
         {
 
-            //sprite.UpdateSprite(run);
+            sprite.UpdateSprite(run.SpriteMaterials[(int)direction], run.FrameCount, run.ImageSpeed );
 
-    
         }
-
         sprite.Render();
-
-
-
-
-    }
-
-
-
-
-    void RenderAnimatedSprite( float frame_count, float speed)
-    {
-        float image_xscale = 1 / frame_count;
-
-        rend.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
-        
-        float offset = ((float)Math.Floor(Time.time * speed) % frame_count) * (1 / frame_count);
-
-        rend.material.SetTextureOffset("_MainTex", new Vector2(offset, 0));
     }
 
     public void ShowArrayProperty(SerializedProperty list)

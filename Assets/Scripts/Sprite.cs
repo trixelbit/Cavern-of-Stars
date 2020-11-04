@@ -46,6 +46,8 @@ public class OctaSpriteSet
     
     public float FrameCount;
     public float ImageSpeed;
+    public Material[] SpriteMaterials =  new Material[8];
+    /*
     public Material Down;
     public Material DownRight;
     public Material Right;
@@ -53,12 +55,14 @@ public class OctaSpriteSet
     public Material Up;
     public Material UpLeft;
     public Material Left;
-    public Material Downleft;
+    public Material Downleft;*/
 
     public OctaSpriteSet(float frameCount, float imageSpeed,  Material[] spriteMaterials)
     {
         FrameCount = frameCount;
         ImageSpeed = imageSpeed;
+        SpriteMaterials = spriteMaterials;
+        /*
         Down = spriteMaterials[0];
         DownRight = spriteMaterials[1];
         Right = spriteMaterials[2];
@@ -67,6 +71,7 @@ public class OctaSpriteSet
         UpLeft = spriteMaterials[5];
         Left = spriteMaterials[6];
         Downleft = spriteMaterials[7];
+        */
 
     }
 }

@@ -6,13 +6,14 @@ using System;
 public enum Direction
 { 
     down = 0,
-    downright = 1,
-    right = 2,
-    upright = 3,
-    up = 4,
-    upleft = 5,
-    left = 6,
-    downleft = 7
+    downleft = 1,
+    downright = 2,
+    left = 3,
+    right = 4,
+    up = 5,
+    upleft = 6,
+    upright = 7
+    
 }
 
 public enum State
@@ -61,7 +62,7 @@ public class movement : MonoBehaviour
         }
         else if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * FrictionPercent, rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed);
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * RunSpeed, rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed);
             CharacterState = State.running;
         }
         else

@@ -18,46 +18,34 @@ public class SpriteRenderer : MonoBehaviour
     Renderer Rend;
     Sprite sprite;
     State CharacterState;
-    Direction direction;
+    Direction Direction;
 
     void Start()
     {
         Rend = GetComponent<Renderer>();
         CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
-        direction = Parent.transform.GetComponent<movement>().Direction;
-        sprite = new Sprite(Rend, 1, 1);
+        Direction = Parent.transform.GetComponent<movement>().Direction;
+        sprite = new Sprite(Rend, idle.SpriteSheets[(int)Direction.down]);
     }
 
     void Update()
     {
         CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
+        Direction = Parent.transform.GetComponent<movement>().Direction;
 
-        if (CharacterState == State.idle)
+
+        switch (CharacterState)
         {
-            sprite.UpdateSprite(idle.SpriteMaterials[(int)direction], idle.FrameCount, idle.ImageSpeed);
+            case State.idle:
+                sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.FrameCount, idle.ImageSpeed, true);
+                break;
 
+            case State.running:
+                sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.FrameCount, run.ImageSpeed, true);
+                break;
         }
-        else if (CharacterState == State.running)
-        {
-
-            sprite.UpdateSprite(run.SpriteMaterials[(int)direction], run.FrameCount, run.ImageSpeed );
-
-        }
+ 
         sprite.Render();
-    }
-
-    public void ShowArrayProperty(SerializedProperty list)
-    {
-        EditorGUILayout.PropertyField(list);
-
-        EditorGUI.indentLevel += 1;
-        for (int i = 0; i < 8; i++)
-        {
-            Direction a = (Direction)i;
-            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i),
-            new GUIContent( a.ToString() ));
-        }
-        EditorGUI.indentLevel -= 1;
     }
 
 

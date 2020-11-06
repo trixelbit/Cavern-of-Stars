@@ -16,7 +16,7 @@ public class SpriteRenderer : MonoBehaviour
     public OctaSpriteSet slash;
 
     Renderer Rend;
-    Sprite sprite;
+    Sprite Sprite;
     State CharacterState;
     Direction Direction;
 
@@ -25,7 +25,7 @@ public class SpriteRenderer : MonoBehaviour
         Rend = GetComponent<Renderer>();
         CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
         Direction = Parent.transform.GetComponent<movement>().Direction;
-        sprite = new Sprite(Rend, idle.SpriteSheets[(int)Direction.down]);
+        Sprite = new Sprite(Rend, idle.SpriteSheets[(int)Direction.down]);
     }
 
     void Update()
@@ -37,15 +37,15 @@ public class SpriteRenderer : MonoBehaviour
         switch (CharacterState)
         {
             case State.idle:
-                sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.FrameCount, idle.ImageSpeed, true);
+                Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.FrameCount, idle.ImageSpeed, true);
                 break;
 
             case State.running:
-                sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.FrameCount, run.ImageSpeed, true);
+                Sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.FrameCount, run.ImageSpeed, true);
                 break;
         }
  
-        sprite.Render();
+        Sprite.Render();
     }
 
 

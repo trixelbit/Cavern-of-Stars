@@ -10,9 +10,9 @@ public enum SpriteState
     CoolDown = 2
 }
 
-public class Sprite //: MonoBehaviour
+public class Sprite
 {
-    // Start is called before the first frame update
+
     public Renderer Renderer;
     public Texture SpriteSheet;
     public float FrameCount = 1;
@@ -81,7 +81,6 @@ public class Sprite //: MonoBehaviour
         if (Loop || ImageIndex < FrameCount - 1)
         {
             ImageIndex = (ImageIndex + (ImageSpeed * Time.deltaTime)) % FrameCount;
-            //Debug.Log(ImageIndex);
         }
         else 
         {
@@ -101,6 +100,8 @@ public class OctaSpriteSet
     
     public float FrameCount;
     public float ImageSpeed;
+
+    [NamedArrayAttribute (new string[] { "down", "down left", "down right", "left", "right", "up", "up left", "up right"} )]
     public Texture[] SpriteSheets = new Texture[8];
 
     public OctaSpriteSet(float frameCount, float imageSpeed,  Texture[] spriteSheets)

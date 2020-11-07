@@ -16,13 +16,16 @@ public class Sprite
     public Renderer Renderer;
     public Transform ParentTransform;
     public Texture SpriteSheet;
+    public Vector3 TransformOrginalScale;
     public float FrameCount = 1;
     public float ImageSpeed = 1;
     public float ImageIndex = 0;
     public bool Loop = true;
     public bool Completed = false;
     public float OrginalSpriteWidth;
+    public float OrginalSpriteHeight;
     public float SpriteWidth;
+    public float SpriteHeight;
 
 
 
@@ -34,6 +37,7 @@ public class Sprite
         ImageSpeed = imageSpeed;
         ImageIndex = imageIndex;
         ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
 
@@ -48,19 +52,24 @@ public class Sprite
         FrameCount = frameCount;
         ImageSpeed = imageSpeed;
         ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
+
     }
 
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform)
     {
         Renderer = renderer;
         ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
 
         OrginalSpriteWidth = Renderer.material.mainTexture.width;
         SpriteWidth = OrginalSpriteWidth;
+        OrginalSpriteHeight = Renderer.material.mainTexture.height;
+        SpriteHeight = OrginalSpriteHeight;
 
     }
 
@@ -91,10 +100,12 @@ public class Sprite
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
 
         float SingleFrameWidth = Renderer.material.mainTexture.width / FrameCount;
+        float SingleFrameHeight = Renderer.material.mainTexture.height;
 
 
         // percentage diff between origanl scale and new scale
-        float ScaleDifference = SingleFrameWidth / OrginalSpriteWidth;
+        float WidthScaleDifference = SingleFrameWidth / OrginalSpriteWidth;
+        float HeightScaleDifference = SingleFrameHeight / OrginalSpriteHeight;
 
 
         Debug.Log("Sprite Width: " + SpriteWidth + " SingleFrameWidth" + SingleFrameWidth);
@@ -102,11 +113,13 @@ public class Sprite
         if (SpriteWidth != SingleFrameWidth)
         {
 
-            ParentTransform.localScale = new Vector3(ParentTransform.localScale.x * ScaleDifference, ParentTransform.localScale.y, ParentTransform.localScale.z);
+            ParentTransform.localScale = new Vector3(TransformOrginalScale.x * WidthScaleDifference, ParentTransform.localScale.y * HeightScaleDifference, ParentTransform.localScale.z);
        
 
         }
 
+        SpriteWidth = SingleFrameWidth;
+        SpriteHeight = SingleFrameHeight;
 
         float offset = (float)Math.Floor(ImageIndex) / FrameCount;
 

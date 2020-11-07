@@ -10,28 +10,30 @@ public enum SpriteState
     CoolDown = 2
 }
 
-public class Sprite : MonoBehaviour
+public class Sprite
 {
 
     public Renderer Renderer;
+    public Transform ParentTransform;
     public Texture SpriteSheet;
     public float FrameCount = 1;
     public float ImageSpeed = 1;
     public float ImageIndex = 0;
     public bool Loop = true;
     public bool Completed = false;
-    private float OrginalSpriteWidth;
-    private float SpriteWidth;
+    public float OrginalSpriteWidth;
+    public float SpriteWidth;
 
 
 
 
-    public Sprite(Renderer renderer, Texture spriteSheet, float frameCount, float imageSpeed, float imageIndex)
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, float imageIndex)
     {
         Renderer = renderer;
         FrameCount = frameCount;
         ImageSpeed = imageSpeed;
         ImageIndex = imageIndex;
+        ParentTransform = transform;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
 
@@ -40,22 +42,26 @@ public class Sprite : MonoBehaviour
 
 
     }
-    public Sprite(Renderer renderer, Texture spriteSheet, float frameCount, float imageSpeed)
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed)
     {
         Renderer = renderer;
         FrameCount = frameCount;
         ImageSpeed = imageSpeed;
+        ParentTransform = transform;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
     }
 
-    public Sprite(Renderer renderer, Texture spriteSheet)
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform)
     {
         Renderer = renderer;
+        ParentTransform = transform;
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
 
         OrginalSpriteWidth = Renderer.material.mainTexture.width;
+        SpriteWidth = OrginalSpriteWidth;
+
     }
 
     public void UpdateSprite(Texture texture, float frameCount, float imageSpeed, bool loop)
@@ -77,24 +83,29 @@ public class Sprite : MonoBehaviour
     {
 
         float image_xscale = 1 / FrameCount;
-        float SingleFrameWidth = Renderer.material.mainTexture.width * image_xscale;
-
-
-        // percentage diff between origanl scale and new scale
-        float ScaleDifference = SingleFrameWidth / OrginalSpriteWidth;
-
-        if (SpriteWidth != SingleFrameWidth)
-        {
-
-            //transform.localScale = new Vector3(transform.localScale.x * ScaleDifference, transform.localScale.y, transform.localScale.z);
-            SpriteWidth = SingleFrameWidth;
-
-        }
+        
 
         
 
         //resizes material xscale to match width of 1 frame
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
+
+        float SingleFrameWidth = Renderer.material.mainTexture.width / FrameCount;
+
+
+        // percentage diff between origanl scale and new scale
+        float ScaleDifference = SingleFrameWidth / OrginalSpriteWidth;
+
+
+        Debug.Log("Sprite Width: " + SpriteWidth + " SingleFrameWidth" + SingleFrameWidth);
+
+        if (SpriteWidth != SingleFrameWidth)
+        {
+
+            ParentTransform.localScale = new Vector3(ParentTransform.localScale.x * ScaleDifference, ParentTransform.localScale.y, ParentTransform.localScale.z);
+       
+
+        }
 
 
         float offset = (float)Math.Floor(ImageIndex) / FrameCount;

@@ -25,7 +25,7 @@ public class SpriteRenderer : MonoBehaviour
         Rend = GetComponent<Renderer>();
         CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
         Direction = Parent.transform.GetComponent<movement>().Direction;
-        Sprite = new Sprite(Rend, idle.SpriteSheets[(int)Direction.down]);
+        Sprite = new Sprite(Rend, idle.SpriteSheets[(int)Direction.down], transform);
     }
 
     void Update()
@@ -44,7 +44,7 @@ public class SpriteRenderer : MonoBehaviour
                 Sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.FrameCount, run.ImageSpeed, true);
                 break;
         }
- 
+
         Sprite.Render();
     }
 

@@ -59,7 +59,12 @@ public class movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+
+        PlayerActionControl.InGame.Attack1.performed += _ => LightSlash();
     }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -68,6 +73,7 @@ public class movement : MonoBehaviour
         Vector3 velocity = rb.velocity;
         float VerticalInput = PlayerActionControl.InGame.Vertical.ReadValue<float>();
         float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
+        bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
 
         Debug.Log(VerticalInput+ ", " + HorizontalInput);
 
@@ -75,7 +81,7 @@ public class movement : MonoBehaviour
 
         
         // kinetic motion
-        if (State.idle == CharacterState || State.running == CharacterState)
+        if (State.slash != CharacterState)
         {
 
             // directino input-
@@ -98,28 +104,20 @@ public class movement : MonoBehaviour
 
             // set animation variables
             SetPlayerDirection(HorizontalInput, VerticalInput);
-
-
-
         }
-
-
-        // attack input
-        /*
-        if (Input.GetButtonDown("Fire1"))
-        {
-            CharacterState = State.slash;
-
-            if (Direction == Direction.down)
-            {
-                rb.velocity = new Vector3(0, 0, -RunSpeed * 2);
-                Debug.Log("Slash!");
-            }
-        }*/
         
 
     }
 
+    private void LightSlash()
+    {
+        CharacterState = State.slash;
+
+        if (Direction == Direction.down)
+        {
+            rb.velocity = new Vector3(0, 0, -RunSpeed * 2);
+        }
+    }
 
     private void SetPlayerDirection( float HorizontalInput, float VerticalInput)
     {

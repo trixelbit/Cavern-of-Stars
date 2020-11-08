@@ -53,26 +53,43 @@ public class movement : MonoBehaviour
 
 
         // kinetic motion
+        if (State.idle == CharacterState || State.running == CharacterState)
+        {
 
-        if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
-        {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed * (float)Math.Sqrt(.5));
-            
-            CharacterState = State.running;
-        }
-        else if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * RunSpeed, rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed);
-            CharacterState = State.running;
-        }
-        else
-        {
-            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
-            CharacterState = State.idle;
+            // directino input-
+            if (Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+            {
+                rb.velocity = new Vector3(Input.GetAxis("Horizontal") * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed * (float)Math.Sqrt(.5));
+
+                CharacterState = State.running;
+            }
+            else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                rb.velocity = new Vector3(Input.GetAxis("Horizontal") * RunSpeed, rb.velocity.y, Input.GetAxis("Vertical") * RunSpeed);
+                CharacterState = State.running;
+            }
+            else
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
+                CharacterState = State.idle;
+            }
+
+            // set animation variables
+            SetPlayerDirection();
         }
 
-        // set animation variables
-        SetPlayerDirection();
+        // attack input
+        if (Input.GetButtonDown("Fire1"))
+        {
+            CharacterState = State.slash;
+
+            if (Direction == Direction.down)
+            {
+                rb.velocity = new Vector3(0, 0, -RunSpeed * 2);
+                Debug.Log("Slash!");
+            }
+        }
+        
 
     }
 
@@ -81,6 +98,7 @@ public class movement : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") > 0)
         {
+
             if (Input.GetAxis("Vertical") > 0)
             {
                 Direction = Direction.upright;

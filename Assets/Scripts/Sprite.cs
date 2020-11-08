@@ -21,6 +21,7 @@ public class Sprite
     public float ImageSpeed = 1;
     public float ImageIndex = 0;
     public bool Loop = true;
+    public bool Interuptable = true;
     public bool Completed = false;
     public float OrginalSpriteWidth;
     public float OrginalSpriteHeight;
@@ -39,7 +40,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
 
         
 
@@ -54,7 +55,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
 
     }
 
@@ -64,7 +65,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true);
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
 
         OrginalSpriteWidth = Renderer.material.mainTexture.width;
         SpriteWidth = OrginalSpriteWidth;
@@ -73,17 +74,19 @@ public class Sprite
 
     }
 
-    public void UpdateSprite(Texture texture, float frameCount, float imageSpeed, bool loop)
+    public void UpdateSprite(Texture texture, float frameCount, float imageSpeed, bool loop, bool interuptable)
     {
         
         if (texture.name != Renderer.sharedMaterial.mainTexture.name )
         {
             Renderer.material.SetTexture("_MainTex", texture);
+            SpriteSheet = texture;
             Loop = loop;
             ImageIndex = 0;
             Completed = false;     
             FrameCount = frameCount;
             ImageSpeed = imageSpeed;
+            Interuptable = interuptable;
         }
     }
 
@@ -99,6 +102,7 @@ public class Sprite
         //resizes material xscale to match width of 1 frame
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
 
+
         float SingleFrameWidth = Renderer.material.mainTexture.width / FrameCount;
         float SingleFrameHeight = Renderer.material.mainTexture.height;
 
@@ -108,13 +112,11 @@ public class Sprite
         float HeightScaleDifference = SingleFrameHeight / OrginalSpriteHeight;
 
 
-        Debug.Log("Sprite Width: " + SpriteWidth + " SingleFrameWidth" + SingleFrameWidth);
-
         if (SpriteWidth != SingleFrameWidth)
         {
 
-            ParentTransform.localScale = new Vector3(TransformOrginalScale.x * WidthScaleDifference, ParentTransform.localScale.y * HeightScaleDifference, ParentTransform.localScale.z);
-       
+            ParentTransform.localScale = new Vector3(TransformOrginalScale.x * WidthScaleDifference, ParentTransform.localScale.y, TransformOrginalScale.z * HeightScaleDifference);
+
 
         }
 

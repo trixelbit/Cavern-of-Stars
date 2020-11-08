@@ -162,7 +162,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 15.95
-  MaxDistance: 263.6
+  MaxDistance: 256.05
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -172,14 +172,14 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.060508344
-      value: 1
-      inSlope: -16.533257
-      outSlope: -16.533257
+      time: 0
+      value: 1.0051651
+      inSlope: -4.94043
+      outSlope: -4.94043
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.3769235
     - serializedVersion: 3
       time: 0.12101669
       value: 0.5
@@ -190,40 +190,40 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.24203338
-      value: 0.25
-      inSlope: -1.0333285
-      outSlope: -1.0333285
+      time: 0.23501433
+      value: 0.22418213
+      inSlope: -1.664203
+      outSlope: -1.664203
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.57928836
       outWeight: 0
     - serializedVersion: 3
-      time: 0.4419525
-      value: 0.07852173
-      inSlope: -0.25833213
-      outSlope: -0.25833213
+      time: 0.36827543
+      value: 0.073349
+      inSlope: -0.78326637
+      outSlope: -0.78326637
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 1
+      outWeight: 0.49041355
     - serializedVersion: 3
-      time: 0.63833004
-      value: 0.015487671
-      inSlope: -0.06458303
-      outSlope: -0.06458303
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
+      time: 0.54034424
       value: 0
       inSlope: -0.06053252
       outSlope: -0.06053252
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.72603756
+      value: 0
+      inSlope: 0.119117655
+      outSlope: 0.119117655
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.99969864
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &446293361
 Transform:
   m_ObjectHideFlags: 0
@@ -7532,7 +7532,7 @@ PrefabInstance:
     - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 250.46863
+      value: 348.09
       objectReference: {fileID: 0}
     - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
         type: 3}
@@ -7542,7 +7542,7 @@ PrefabInstance:
     - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 196.7
+      value: 202.5
       objectReference: {fileID: 0}
     - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
         type: 3}
@@ -7583,6 +7583,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 249.33328
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 236.6366
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981293015671276694, guid: 7450971df1b11754ea6aea224401a200,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 41.984722
       objectReference: {fileID: 0}
     - target: {fileID: 6981293015671276714, guid: 7450971df1b11754ea6aea224401a200,
         type: 3}

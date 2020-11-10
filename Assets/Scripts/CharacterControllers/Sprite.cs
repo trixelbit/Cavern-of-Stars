@@ -95,6 +95,7 @@ public class Sprite
         if (texture.name != Renderer.sharedMaterial.mainTexture.name )
         {
             Renderer.material.SetTexture("_MainTex", texture);
+            Renderer.material.SetTexture("_EmissionMap", texture);
             SpriteSheet = texture;
             Loop = loop;
             ImageIndex = 0;
@@ -116,6 +117,7 @@ public class Sprite
 
         //resizes material xscale to match width of 1 frame
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
+        Renderer.material.SetTextureScale("_EmissionMap", new Vector2(image_xscale, 1f));
 
 
         float SingleFrameWidth = Renderer.material.mainTexture.width / FrameCount;

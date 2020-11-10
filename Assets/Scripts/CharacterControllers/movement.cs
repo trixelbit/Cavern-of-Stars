@@ -115,31 +115,54 @@ public class movement : MonoBehaviour
         CharacterState = State.slash;
 
 
-        rb.velocity = GetVector3FromDirection(Direction, 10);
+        rb.velocity += Vector3FromDirectionMagnitude(Direction, 10);
         GameObject Attack = Instantiate(Slash1);
-        Attack.transform.position = transform.position;
-        Attack.GetComponent<AttackVFX>().InitialVelocity = rb.velocity;
-        Attack.transform.rotation = Quaternion.Euler(0,0,AngleFromDirection(Direction));
+        Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
+        Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
 
     }
 
-    private Vector3 GetVector3FromDirection(Direction direction, float magnitude)
+    private Vector3 Vector3FromDirectionMagnitude(Direction direction, float magnitude)
     {
-        Vector3 result;
+        Vector3 result = new Vector3(0,0,0);
         switch (direction)
         {
             case Direction.up:
-                result = new Vector3(rb.velocity.x, rb.velocity.y, magnitude);
+                result = new Vector3(0, 0, magnitude);
 
                 break;
             case Direction.down:
-                result = new Vector3(rb.velocity.x, rb.velocity.y, -magnitude);
+                result = new Vector3(0, 0, -magnitude);
                 break;
 
             case Direction.left:
+                result = new Vector3(-magnitude, 0, 0);
+                break;
+
+            case Direction.right:
+                result = new Vector3(magnitude, 0, 0);
+                break;
+
+            case Direction.downleft:
+                result = new Vector3(-magnitude * (float)Math.Sqrt(.5), 0, -magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.downright:
+                result = new Vector3(magnitude * (float)Math.Sqrt(.5), 0, -magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.upleft:
+                result = new Vector3(-magnitude * (float)Math.Sqrt(.5), 0, magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.upright:
+                result = new Vector3(magnitude * (float)Math.Sqrt(.5), 0, magnitude * (float)Math.Sqrt(.5));
                 break;
 
         }
+
+
+        return result;
         
     }
 

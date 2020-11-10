@@ -47,6 +47,21 @@ public class Sprite
 
 
     }
+
+
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, bool loop)
+    {
+        Renderer = renderer;
+        FrameCount = frameCount;
+        ImageSpeed = imageSpeed;
+        ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
+        Loop = loop;
+
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+
+    }
+
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed)
     {
         Renderer = renderer;
@@ -112,9 +127,10 @@ public class Sprite
         float HeightScaleDifference = SingleFrameHeight / OrginalSpriteHeight;
 
 
-        if (SpriteWidth != SingleFrameWidth)
+        if (SpriteWidth != SingleFrameWidth && ParentTransform != null)
         {
 
+            
             ParentTransform.localScale = new Vector3(TransformOrginalScale.x * WidthScaleDifference, ParentTransform.localScale.y, TransformOrginalScale.z * HeightScaleDifference);
 
 

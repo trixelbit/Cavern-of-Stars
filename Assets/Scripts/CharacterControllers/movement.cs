@@ -39,6 +39,8 @@ public class movement : MonoBehaviour
 
     private PlayerContolBridge PlayerActionControl;
 
+    public GameObject Slash1;
+
     private void Awake()
     {
         PlayerActionControl = new PlayerContolBridge();
@@ -60,10 +62,10 @@ public class movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-
+        
         PlayerActionControl.InGame.Attack1.performed += _ => LightSlash();
     }
-
+    
 
 
     // Update is called once per frame
@@ -75,7 +77,6 @@ public class movement : MonoBehaviour
         float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
         bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
 
-        Debug.Log(VerticalInput+ ", " + HorizontalInput);
 
         // state checks
 
@@ -113,10 +114,33 @@ public class movement : MonoBehaviour
     {
         CharacterState = State.slash;
 
-        if (Direction == Direction.down)
+
+        rb.velocity = GetVector3FromDirection(Direction, 10);
+        GameObject Attack = Instantiate(Slash1);
+        Attack.transform.position = transform.position;
+        Attack.GetComponent<AttackVFX>().InitialVelocity = rb.velocity;
+        Attack.transform.rotation = Quaternion.Euler(0,0,AngleFromDirection(Direction));
+
+    }
+
+    private Vector3 GetVector3FromDirection(Direction direction, float magnitude)
+    {
+        Vector3 result;
+        switch (direction)
         {
-            rb.velocity = new Vector3(0, 0, -RunSpeed * 2);
+            case Direction.up:
+                result = new Vector3(rb.velocity.x, rb.velocity.y, magnitude);
+
+                break;
+            case Direction.down:
+                result = new Vector3(rb.velocity.x, rb.velocity.y, -magnitude);
+                break;
+
+            case Direction.left:
+                break;
+
         }
+        
     }
 
     private void SetPlayerDirection( float HorizontalInput, float VerticalInput)
@@ -163,6 +187,43 @@ public class movement : MonoBehaviour
                 Direction = Direction.down;
             }
         }
+    }
+
+    private float AngleFromDirection(Direction direction)
+    {
+        float angle = 0;
+
+        switch(direction)
+        {
+            case Direction.down:
+                angle = 270;
+                break;
+
+            case Direction.downleft:
+                angle = 225;
+                break;
+            case Direction.downright:
+                angle = 315;
+                break;
+            case Direction.left:
+                angle = 180;
+                break;
+            case Direction.right:
+                angle = 0;
+                break;
+            case Direction.up:
+                angle = 90;
+                break;
+            case Direction.upleft:
+                angle = 135;
+                break;
+            case Direction.upright:
+                angle = 45;
+                break;
+
+        }
+
+        return angle;
     }
 
  

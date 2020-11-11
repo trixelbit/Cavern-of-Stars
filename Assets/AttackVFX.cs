@@ -29,14 +29,16 @@ public class AttackVFX : MonoBehaviour
     {
         if (SpritePlane != null)
         {
-            Sprite.Render();
 
             if (Sprite.Completed)
             {
+                //Sprite.ParentTransform = null;
                 Destroy(SpritePlane);
                 Destroy(this.gameObject);
 
             }
+
+            Sprite.Render();
         }
     }
 }

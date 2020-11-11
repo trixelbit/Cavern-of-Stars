@@ -29,6 +29,7 @@ public class movement : MonoBehaviour
 {   
     
     public Rigidbody rb;
+    public GameObject SpritePlane;
 
     public float RunSpeed;
     public float DashSpeed = 3;
@@ -61,7 +62,6 @@ public class movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         
         PlayerActionControl.InGame.Attack1.performed += _ => LightSlash();
     }
@@ -107,18 +107,21 @@ public class movement : MonoBehaviour
             SetPlayerDirection(HorizontalInput, VerticalInput);
         }
         
-
     }
 
     private void LightSlash()
     {
-        CharacterState = State.slash;
+        
 
-
-        rb.velocity += Vector3FromDirectionMagnitude(Direction, 10);
-        GameObject Attack = Instantiate(Slash1);
-        Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
-        Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
+        if ( CharacterState != State.slash)
+        {
+            CharacterState = State.slash;
+            rb.velocity += Vector3FromDirectionMagnitude(Direction, 1);
+            GameObject Attack = Instantiate(Slash1);
+            Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
+            Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
+        }
+        
 
     }
 

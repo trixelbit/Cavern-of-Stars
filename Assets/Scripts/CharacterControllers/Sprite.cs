@@ -42,10 +42,6 @@ public class Sprite
 
         UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
 
-        
-
-
-
     }
 
 
@@ -129,7 +125,7 @@ public class Sprite
         float HeightScaleDifference = SingleFrameHeight / OrginalSpriteHeight;
 
 
-        if (SpriteWidth != SingleFrameWidth && ParentTransform != null)
+        if (SpriteWidth != SingleFrameWidth && Math.Abs(TransformOrginalScale.x * WidthScaleDifference) != Mathf.Infinity )
         {
 
             

@@ -16,7 +16,7 @@ public class SpriteRenderer : MonoBehaviour
     public OctaSpriteSet slash;
 
     Renderer Rend;
-    Sprite Sprite;
+    public Sprite Sprite;
     State CharacterState;
     Direction Direction;
 
@@ -48,6 +48,7 @@ public class SpriteRenderer : MonoBehaviour
                 Debug.Log("Cond 1" + Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] + "Cond 2" + Sprite.Completed);
                 if (Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] && Sprite.Completed)
                 {
+                    // return back to idle
                     Parent.transform.GetComponent<movement>().CharacterState = State.idle;
                     Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.FrameCount, idle.ImageSpeed, true, true);
                 }

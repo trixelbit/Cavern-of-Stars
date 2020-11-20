@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\Scripts\WaterManager.cs" />
      <Compile Include="Assets\AttackVFX.cs" />
+     <Compile Include="Assets\BaseEnemyClass.cs" />
      <None Include="Assets\Art\Old Test Files\terrain\NewSurfaceShader.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

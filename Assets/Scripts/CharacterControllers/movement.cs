@@ -116,7 +116,7 @@ public class movement : MonoBehaviour
         if ( CharacterState != State.slash)
         {
             CharacterState = State.slash;
-            rb.velocity += Vector3FromDirectionMagnitude(Direction, 0);
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, 1);
             GameObject Attack = Instantiate(Slash1);
             Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
             Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));

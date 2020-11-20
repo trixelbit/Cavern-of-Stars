@@ -45,7 +45,7 @@ public class SpriteRenderer : MonoBehaviour
                 break;
             case State.slash:
 
-                Debug.Log("Cond 1" + Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] + "Cond 2" + Sprite.Completed);
+                
                 if (Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] && Sprite.Completed)
                 {
                     // return back to idle

@@ -56,7 +56,7 @@ public class EnemyFloaterClass : BaseEnemyClass
             flip = -1;
         }
 
-        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * flip, transform.localScale.y, transform.localScale.z);
+        SpritePlane.transform.localScale = new Vector3(Mathf.Abs(SpritePlane.transform.localScale.x) * flip, SpritePlane.transform.transform.localScale.y, SpritePlane.transform.localScale.z);
     }
 
     public override void Death() 

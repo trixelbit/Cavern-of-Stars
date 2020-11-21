@@ -113,12 +113,10 @@ public class movement : MonoBehaviour
 
     private void LightSlash()
     {
-        
-
         if ( CharacterState != State.slash)
         {
             CharacterState = State.slash;
-            rb.velocity = Vector3FromDirectionMagnitude(Direction, 20);
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
             GameObject Attack = Instantiate(Slash1);
             Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
             Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
@@ -266,7 +264,7 @@ public class movement : MonoBehaviour
 
     private void DamagePlayer(Vector3 collisionPoint)
     {
-        transform.position = Vector3.MoveTowards(transform.position, collisionPoint, -2);
+        rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
         SessionData.Health--;
         Debug.Log(SessionData.Health);
     }

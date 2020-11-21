@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PostProcessVolume
   - Hit
+  - Enemy
   layers:
   - Default
   - TransparentFX

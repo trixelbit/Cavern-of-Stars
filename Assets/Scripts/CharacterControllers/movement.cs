@@ -30,6 +30,7 @@ public class movement : MonoBehaviour
     
     public Rigidbody rb;
     public GameObject SpritePlane;
+    public GameObject HurtVFX;
 
     public float RunSpeed;
     public float DashSpeed = 3;
@@ -45,6 +46,7 @@ public class movement : MonoBehaviour
     private void Awake()
     {
         PlayerActionControl = new PlayerContolBridge();
+        SessionData.Player = gameObject;
 
     }
 
@@ -116,12 +118,22 @@ public class movement : MonoBehaviour
         if ( CharacterState != State.slash)
         {
             CharacterState = State.slash;
-            rb.velocity = Vector3FromDirectionMagnitude(Direction, 1);
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, 20);
             GameObject Attack = Instantiate(Slash1);
             Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
             Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
         }
         
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            DamagePlayer(other.transform.position);
+        }
+
 
     }
 
@@ -250,6 +262,13 @@ public class movement : MonoBehaviour
         }
 
         return angle;
+    }
+
+    private void DamagePlayer(Vector3 collisionPoint)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, collisionPoint, -2);
+        SessionData.Health--;
+        Debug.Log(SessionData.Health);
     }
 
  

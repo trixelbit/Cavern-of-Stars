@@ -15,7 +15,14 @@ public class EnemyFloaterClass : BaseEnemyClass
     // Update is called once per frame
     void Update()
     {
+        if (Vector3.Distance(transform.position, SessionData.Player.transform.position) < 30)
+        {
+            FloaterMovement();
+            Faceplayer();
+        }
+        
         CheckHP();
+        
         OscilateSpritePlane();
         LerpBackToPosition();
     }
@@ -38,7 +45,18 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     private void Faceplayer()
     {
+        int flip = 1;
+        
+        if (SessionData.Player.transform.position.x > transform.position.x)
+        {
+            flip = 1;
+        }
+        else
+        {
+            flip = -1;
+        }
 
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * flip, transform.localScale.y, transform.localScale.z);
     }
 
     public override void Death() 
@@ -57,7 +75,8 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     public void FloaterMovement()
     {
-        
+        transform.position = Vector3.MoveTowards( transform.position, SessionData.Player.transform.position,.01f);
+
     }
 
 

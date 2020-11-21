@@ -43,12 +43,11 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     public override void Death() 
     {
-        Debug.Log(" part ded");
         Haze.GetComponent<ParticleSystem>().Stop();
         Haze.transform.parent = null;
         Destroy(Haze, 5);
         Destroy(gameObject);
-        Debug.Log("ded ded");
+
     }
 
     public Vector3 Vector3Differenece(Vector3 a, Vector3 b)

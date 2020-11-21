@@ -22,7 +22,7 @@ public class BaseEnemyClass : MonoBehaviour
         if (collision.tag == "Hit")
         {
             RecieveDamage(1);
-        }
+            Debug.Log(HP);        }
     }
 
     public void RecieveDamage(int damageDelt)

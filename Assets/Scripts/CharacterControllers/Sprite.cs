@@ -20,6 +20,8 @@ public class Sprite
     public float FrameCount = 1;
     public float ImageSpeed = 1;
     public float ImageIndex = 0;
+    public bool Active = false;
+    public Vector2 ActiveFrames;
     public bool Loop = true;
     public bool Interuptable = true;
     public bool Completed = false;
@@ -30,7 +32,7 @@ public class Sprite
 
 
 
-
+    #region Constructors
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, float imageIndex)
     {
         Renderer = renderer;
@@ -44,6 +46,32 @@ public class Sprite
 
     }
 
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, float imageIndex, Vector2 activeFrames)
+    {
+        Renderer = renderer;
+        FrameCount = frameCount;
+        ImageSpeed = imageSpeed;
+        ImageIndex = imageIndex;
+        ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
+        ActiveFrames = activeFrames;
+
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+
+    }
+
+    public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, bool loop, Vector2 activeFrames)
+    {
+        Renderer = renderer;
+        FrameCount = frameCount;
+        ImageSpeed = imageSpeed;
+        ParentTransform = transform;
+        TransformOrginalScale = transform.localScale;
+        Loop = loop;
+        ActiveFrames = activeFrames;
+
+        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+    }
 
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, bool loop)
     {
@@ -85,6 +113,8 @@ public class Sprite
 
     }
 
+    #endregion
+
     public void UpdateSprite(Texture texture, float frameCount, float imageSpeed, bool loop, bool interuptable)
     {
         
@@ -102,14 +132,30 @@ public class Sprite
         }
     }
 
+    public bool IsActive()
+    {
+        if (ActiveFrames != null)
+        {
+            if (ImageIndex >= ActiveFrames.x && ImageIndex <= ActiveFrames.y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void Render()
     {
+        Active = IsActive();
 
         float image_xscale = 1 / FrameCount;
-        
-
-        
 
         //resizes material xscale to match width of 1 frame
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
@@ -127,11 +173,7 @@ public class Sprite
 
         if (SpriteWidth != SingleFrameWidth && Math.Abs(TransformOrginalScale.x * WidthScaleDifference) != Mathf.Infinity )
         {
-
-            
             ParentTransform.localScale = new Vector3(TransformOrginalScale.x * WidthScaleDifference, ParentTransform.localScale.y, TransformOrginalScale.z * HeightScaleDifference);
-
-
         }
 
         SpriteWidth = SingleFrameWidth;
@@ -155,6 +197,7 @@ public class Sprite
 
     }
 }
+
 
 
 [Serializable]

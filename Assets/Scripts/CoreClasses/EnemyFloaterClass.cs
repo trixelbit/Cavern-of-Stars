@@ -30,7 +30,7 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     private void OscilateSpritePlane()
     {
-        SpritePlane.transform.position = new Vector3(SpritePlane.transform.position.x, .5f * Mathf.Sin(Time.time) + transform.position.y, SpritePlane.transform.position.z);
+        SpritePlane.transform.position = new Vector3(SpritePlane.transform.position.x, .5f * Mathf.Sin(Time.time * 3) + transform.position.y, SpritePlane.transform.position.z);
     }
 
     private void LerpBackToPosition()

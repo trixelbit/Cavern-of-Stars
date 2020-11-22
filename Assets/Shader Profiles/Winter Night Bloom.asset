@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 10.8
+    value: 5.99
   threshold:
     overrideState: 1
     value: 1
@@ -200,13 +200,13 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 0.86421555, y: 0.8762356, z: 1, w: 0}
+    value: {x: 0.67646813, y: 0.7308811, z: 1, w: 0}
   gamma:
-    overrideState: 0
-    value: {x: 0.94215137, y: 0.9724157, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.40655565, z: 0.47180745, w: 0.13490725}
   gain:
-    overrideState: 0
-    value: {x: 0.9029372, y: 1, z: 0.9589972, w: 0}
+    overrideState: 1
+    value: {x: 0.5132781, y: 0.9085454, z: 1, w: 0}
   masterCurve:
     overrideState: 0
     value:
@@ -1440,16 +1440,16 @@ MonoBehaviour:
   active: 0
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 40
+    value: -16.92
   intensityX:
     overrideState: 1
-    value: 0.2
-  intensityY:
-    overrideState: 0
     value: 1
+  intensityY:
+    overrideState: 1
+    value: 0
   centerX:
     overrideState: 0
     value: 0
@@ -1457,8 +1457,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   scale:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.97
 --- !u!114 &9145724044617617406
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1477,13 +1477,13 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 46.06
+    value: 58.2
   aperture:
     overrideState: 1
-    value: 2.8
+    value: 1.6
   focalLength:
     overrideState: 1
-    value: 192
+    value: 195.61
   kernelSize:
     overrideState: 1
     value: 1

@@ -43,7 +43,7 @@ public class BaseEnemyClass : MonoBehaviour
         SpritePlane.transform.position += new Vector3(Random.Range(-KnockBackValue, KnockBackValue), Random.Range(-KnockBackValue, KnockBackValue), Random.Range(-KnockBackValue, KnockBackValue));
         transform.position = Vector3.MoveTowards(transform.position, SessionData.Player.transform.position, -2);
         HP -= damageDelt;
-        Invoke("ResetCoolDownInvulnerability", .1f);
+        Invoke("ResetCoolDownInvulnerability", .2f);
     }
 
     public void ResetCoolDownInvulnerability()

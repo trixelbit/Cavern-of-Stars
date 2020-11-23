@@ -43,6 +43,7 @@ public class movement : MonoBehaviour
 
     public GameObject Slash1;
 
+
     private void Awake()
     {
         PlayerActionControl = new PlayerContolBridge();
@@ -113,7 +114,7 @@ public class movement : MonoBehaviour
 
     private void LightSlash()
     {
-        if ( CharacterState != State.slash)
+        if ( CharacterState != State.slash || SessionData.ComboCount > 0)
         {
             CharacterState = State.slash;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
@@ -121,8 +122,6 @@ public class movement : MonoBehaviour
             Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
             Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
         }
-        
-
     }
 
     void OnTriggerEnter(Collider other)

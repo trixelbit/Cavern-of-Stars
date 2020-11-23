@@ -13,7 +13,7 @@ public class BaseEnemyClass : MonoBehaviour
     public GameObject SpritePlane;
     public GameObject HitVFX;
     public Rigidbody rb;
-    public float CoolDownDuration = .000000001f;
+
 
     private bool Invulnerable = false;
     private Renderer rend;
@@ -36,7 +36,8 @@ public class BaseEnemyClass : MonoBehaviour
 
     public void RecieveDamage(int damageDelt)
     {
-       
+
+        AddToComboCount();
         Invulnerable = true;
         GameObject VFX = Instantiate(HitVFX);
         VFX.transform.position = transform.position;
@@ -61,11 +62,25 @@ public class BaseEnemyClass : MonoBehaviour
         }
     }
 
-
-
     public virtual void Death()
     {
         Destroy(gameObject);
+    }
+
+    public void ResetComboCount()
+    {
+        SessionData.ComboCount = 0;
+        SessionData.ComboTimeStamp = 0;
+    }
+
+    public void AddToComboCount()
+    {
+        if (SessionData.ComboCount == 0 || 0.1f > Time.time - SessionData.ComboTimeStamp)
+        {
+            SessionData.ComboCount++;
+            SessionData.ComboTimeStamp = Time.time;
+            Invoke("ResetComboCount", 0.01f);
+        }
     }
 
 }

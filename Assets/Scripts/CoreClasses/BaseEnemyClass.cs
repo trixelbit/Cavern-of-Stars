@@ -70,7 +70,7 @@ public class BaseEnemyClass : MonoBehaviour
     public void ResetComboCount()
     {
         SessionData.ComboCount = 0;
-        SessionData.ComboTimeStamp = 0;
+        SessionData.ComboTimeStamp = 0;   
     }
 
     public void AddToComboCount()

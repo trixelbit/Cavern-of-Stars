@@ -18,13 +18,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1.25
+    value: 1.58
   threshold:
     overrideState: 1
-    value: 0.84
+    value: 0.71
   softKnee:
     overrideState: 1
-    value: 0.57
+    value: 0
   clamp:
     overrideState: 0
     value: 65472
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -200,14 +200,14 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   brightness:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 7
   postExposure:
     overrideState: 0
     value: 0
   contrast:
     overrideState: 1
-    value: -16.94
+    value: -9
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -236,11 +236,11 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 1
-    value: {x: 0.32961667, y: 0.7385613, z: 1, w: 0}
+    overrideState: 0
+    value: {x: 0.7372819, y: 0.96784073, z: 1, w: -0.1015763}
   gamma:
-    overrideState: 1
-    value: {x: 1, y: 0, z: 0.085211754, w: 0.067453615}
+    overrideState: 0
+    value: {x: 0.9972565, y: 1, z: 0.9327457, w: 0.08496675}
   gain:
     overrideState: 0
     value: {x: 0.89672047, y: 0.8988295, z: 1, w: 0}
@@ -1537,22 +1537,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f6f3f7c722b4544b97e3c75840aa33, type: 3}
   m_Name: AutoExposure
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 50, y: 95}
+    value: {x: 54.00003, y: 99}
   minLuminance:
     overrideState: 1
-    value: -0.35
+    value: -1.6
   maxLuminance:
     overrideState: 1
     value: 9
   keyValue:
     overrideState: 1
-    value: 1
+    value: 0.5
   eyeAdaptation:
     overrideState: 0
     value: 0
@@ -1580,13 +1580,13 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 134.73
+    value: 141.76
   aperture:
     overrideState: 1
     value: 0.2
   focalLength:
     overrideState: 1
-    value: 144.2
+    value: 209
   kernelSize:
     overrideState: 1
-    value: 0
+    value: 3

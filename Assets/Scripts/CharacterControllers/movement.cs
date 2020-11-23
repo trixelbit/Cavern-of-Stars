@@ -40,6 +40,7 @@ public class movement : MonoBehaviour
     public State CharacterState = State.idle;
 
     private PlayerContolBridge PlayerActionControl;
+    private bool stun = false;
 
     public GameObject Slash1;
 
@@ -82,35 +83,46 @@ public class movement : MonoBehaviour
 
 
         // state checks
-
-        
-        // kinetic motion
-        if (State.slash != CharacterState)
+        if (!stun)
         {
 
-            // directino input-
-            if (HorizontalInput != 0 && VerticalInput != 0)
+            // kinetic motion
+            if (State.slash != CharacterState)
             {
-                rb.velocity = new Vector3(HorizontalInput * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, VerticalInput * RunSpeed * (float)Math.Sqrt(.5));
 
-                CharacterState = State.running;
-            }
-            else if (HorizontalInput != 0 || VerticalInput != 0)
-            {
-                rb.velocity = new Vector3(HorizontalInput * RunSpeed, rb.velocity.y, VerticalInput * RunSpeed);
-                CharacterState = State.running;
-            }
-            else
-            {
-                rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
-                CharacterState = State.idle;
-            }
+                // directino input-
+                if (HorizontalInput != 0 && VerticalInput != 0)
+                {
+                    rb.velocity = new Vector3(HorizontalInput * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, VerticalInput * RunSpeed * (float)Math.Sqrt(.5));
 
-            // set animation variables
-            SetPlayerDirection(HorizontalInput, VerticalInput);
+                    CharacterState = State.running;
+                }
+                else if (HorizontalInput != 0 || VerticalInput != 0)
+                {
+                    rb.velocity = new Vector3(HorizontalInput * RunSpeed, rb.velocity.y, VerticalInput * RunSpeed);
+                    CharacterState = State.running;
+                }
+                else
+                {
+                    rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
+                    CharacterState = State.idle;
+                }
+
+                // set animation variables
+                SetPlayerDirection(HorizontalInput, VerticalInput);
+            }
         }
         
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            DamagePlayer(other.transform.position);
+        }
+    }
+
 
     private void LightSlash()
     {
@@ -124,14 +136,10 @@ public class movement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+
+    private void ResetStun()
     {
-        if (other.tag == "Enemy")
-        {
-            DamagePlayer(other.transform.position);
-        }
-
-
+        stun = false;
     }
 
     private Vector3 Vector3FromDirectionMagnitude(Direction direction, float magnitude)
@@ -263,9 +271,14 @@ public class movement : MonoBehaviour
 
     private void DamagePlayer(Vector3 collisionPoint)
     {
-        rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
-        SessionData.Health--;
-        Debug.Log(SessionData.Health);
+        if (!stun)
+        {
+            stun = true;
+            Invoke("ResetStun", .3f);
+            rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
+            SessionData.Health--;
+            Debug.Log(SessionData.Health);
+        }
     }
 
  

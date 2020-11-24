@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthBarDrawer : MonoBehaviour
 {
     public GameObject HeartSprite;
+    public GameObject BackSprite;
     public float HorizontalSpacing = 10;
     public Vector2 Offset = new Vector2(0, 1080);
 
@@ -18,6 +19,17 @@ public class HealthBarDrawer : MonoBehaviour
         Offset.x += HeartSprite.GetComponent<RectTransform>().rect.width / 2;
         Offset.y -= HeartSprite.GetComponent<RectTransform>().rect.height / 2;
 
+        // heart containers
+        for (int i = 0; i < SessionData.HealthCap; i++)
+        {
+            ObjectReference = Instantiate(BackSprite);
+            ObjectReference.transform.SetParent(gameObject.transform);
+            ObjectReference.transform.position = new Vector3(Offset.x, Offset.y, 0);
+            ObjectReference.transform.position += new Vector3(i * HorizontalSpacing, 0, 0);
+            HeartSprites[i] = ObjectReference;
+        }
+
+        // hearts
         for (int i = 0; i < SessionData.HealthCap; i++)
         {
             ObjectReference = Instantiate(HeartSprite);

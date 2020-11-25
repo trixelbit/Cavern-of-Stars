@@ -12,6 +12,7 @@ public class VFXClass : MonoBehaviour
 
     public Sprite Sprite;
     public Vector3 InitialVelocity = new Vector3(0, 0, 0);
+    public bool DeleteOnComplete = true;
 
     [HideInInspector]
     public Renderer rend;
@@ -20,7 +21,7 @@ public class VFXClass : MonoBehaviour
     void Start()
     {
         rend = SpritePlane.GetComponent<Renderer>();
-        Sprite = new Sprite(rend, SpriteSheet, SpritePlane.GetComponent<Transform>(), FrameCount, ImageSpeed, false);
+        Sprite = new Sprite(rend, SpriteSheet, SpritePlane.GetComponent<Transform>(), FrameCount, ImageSpeed, !DeleteOnComplete);
         GetComponent<Rigidbody>().velocity = InitialVelocity;
     }
 
@@ -30,17 +31,16 @@ public class VFXClass : MonoBehaviour
         if (Billboard)
         {
             transform.LookAt(Camera.main.transform);
-            transform.rotation *= Quaternion.Euler(180, 0, 0);
+            transform.rotation *= Quaternion.Euler(180, 0, 90);
         }
         
         if (SpritePlane != null)
         {
-            if (Sprite.Completed)
+            if (Sprite.Completed && DeleteOnComplete)
             {
                 //Sprite.ParentTransform = null;
                 Destroy(SpritePlane);
                 Destroy(this.gameObject);
-
             }
 
             Sprite.Render();

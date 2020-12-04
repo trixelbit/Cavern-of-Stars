@@ -16,6 +16,7 @@ public class Sprite
     public Renderer Renderer;
     public Transform ParentTransform;
     public Texture SpriteSheet;
+    public Texture SpriteNormal;
     public Vector3 TransformOrginalScale;
     public float FrameCount = 1;
     public float ImageSpeed = 1;
@@ -42,7 +43,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
 
     }
 
@@ -56,7 +57,7 @@ public class Sprite
         TransformOrginalScale = transform.localScale;
         ActiveFrames = activeFrames;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
 
     }
 
@@ -70,7 +71,7 @@ public class Sprite
         Loop = loop;
         ActiveFrames = activeFrames;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
     }
 
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, bool loop)
@@ -82,7 +83,7 @@ public class Sprite
         TransformOrginalScale = transform.localScale;
         Loop = loop;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
 
     }
 
@@ -94,7 +95,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
 
     }
 
@@ -104,7 +105,7 @@ public class Sprite
         ParentTransform = transform;
         TransformOrginalScale = transform.localScale;
 
-        UpdateSprite(spriteSheet, FrameCount, ImageSpeed, true, true);
+        UpdateSprite(spriteSheet, null, FrameCount, ImageSpeed, true, true);
 
         OrginalSpriteWidth = Renderer.material.mainTexture.width;
         SpriteWidth = OrginalSpriteWidth;
@@ -115,13 +116,14 @@ public class Sprite
 
     #endregion
 
-    public void UpdateSprite(Texture texture, float frameCount, float imageSpeed, bool loop, bool interuptable)
+    public void UpdateSprite(Texture texture, Texture normal, float frameCount, float imageSpeed, bool loop, bool interuptable)
     {
         
         if (texture.name != Renderer.sharedMaterial.mainTexture.name )
         {
             Renderer.material.SetTexture("_MainTex", texture);
             Renderer.material.SetTexture("_EmissionMap", texture);
+            Renderer.material.SetTexture("_BumpMap", normal);
             SpriteSheet = texture;
             Loop = loop;
             ImageIndex = 0;
@@ -159,6 +161,9 @@ public class Sprite
 
         //resizes material xscale to match width of 1 frame
         Renderer.material.SetTextureScale("_MainTex", new Vector2(image_xscale, 1f));
+
+        Renderer.material.SetTextureScale("_BumpMap", new Vector2(image_xscale, 1f));
+
         Renderer.material.SetTextureScale("_EmissionMap", new Vector2(image_xscale, 1f));
 
 
@@ -182,7 +187,8 @@ public class Sprite
         float offset = (float)Math.Floor(ImageIndex) / FrameCount;
 
         Renderer.material.SetTextureOffset("_MainTex", new Vector2(offset, 0));
-        
+        Renderer.material.SetTextureOffset("_BumpMap", new Vector2(offset, 0));
+
         if (Loop || ImageIndex < FrameCount - 1)
         {
             ImageIndex = (ImageIndex + (ImageSpeed * Time.deltaTime)) % FrameCount;
@@ -203,19 +209,30 @@ public class Sprite
 [Serializable]
 public class OctaSpriteSet
 {
-    
     public float FrameCount;
     public float ImageSpeed;
 
     [NamedArrayAttribute (new string[] { "down", "down left", "down right", "left", "right", "up", "up left", "up right"} )]
     public Texture[] SpriteSheets = new Texture[8];
 
+    [NamedArrayAttribute(new string[] { "down", "down left", "down right", "left", "right", "up", "up left", "up right" })]
+    public Texture[] SpriteNormals = new Texture[8];
+
     public OctaSpriteSet(float frameCount, float imageSpeed,  Texture[] spriteSheets)
     {
         FrameCount = frameCount;
         ImageSpeed = imageSpeed;
         SpriteSheets = spriteSheets;
+        SpriteNormals = null;
     }
+    public OctaSpriteSet(float frameCount, float imageSpeed, Texture[] spriteSheets, Texture[] spriteNormals)
+    {
+        FrameCount = frameCount;
+        ImageSpeed = imageSpeed;
+        SpriteSheets = spriteSheets;
+        SpriteNormals = spriteNormals;
+    }
+
 }
 
 

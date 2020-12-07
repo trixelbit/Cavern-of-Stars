@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class SpriteRenderer : MonoBehaviour
+public class CharacterRenderer : MonoBehaviour
 {
     public GameObject Parent;
 

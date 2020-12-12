@@ -21819,8 +21819,8 @@ GameObject:
   - component: {fileID: 1504264062596923337}
   - component: {fileID: 1504264062596923338}
   - component: {fileID: 1504264062596923350}
-  - component: {fileID: 1504264062596923339}
   - component: {fileID: 1504264062596923349}
+  - component: {fileID: 1504264062596923339}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -21840,9 +21840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3982db6a03918de4984e78ce0aa9efbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterObject: {fileID: 0}
-  maxWaterCount: 6
-  WaterList: []
 --- !u!54 &1504264062596923350
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -49,15 +49,12 @@ public class movement : MonoBehaviour
     {
         PlayerActionControl = new PlayerContolBridge();
         SessionData.Player = gameObject;
-
     }
-
     private void OnEnable()
     {
         PlayerActionControl.Enable();
         
     }
-
     private void OnDisable()
     {
         PlayerActionControl.Disable();
@@ -135,7 +132,6 @@ public class movement : MonoBehaviour
             Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
         }
     }
-
 
     private void ResetStun()
     {

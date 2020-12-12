@@ -76,6 +76,9 @@
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="YarnSpinner.Unity.Editor">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/YarnSpinner.Unity.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.InputSystem">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
  </Reference>
@@ -94,6 +97,9 @@
  <Reference Include="Unity.Rider.Editor">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="YarnSpinner.Unity">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/YarnSpinner.Unity.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
@@ -105,12 +111,6 @@
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="YarnSpinner.Unity.Editor">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/YarnSpinner.Unity.Editor.dll</HintPath>
- </Reference>
- <Reference Include="YarnSpinner.Unity">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/ScriptAssemblies/YarnSpinner.Unity.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -295,35 +295,35 @@
  <Reference Include="UnityEngine.XRModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
- <Reference Include="System.Reflection.TypeExtensions">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Reflection.TypeExtensions.dll</HintPath>
- </Reference>
- <Reference Include="System.Buffers">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Buffers.dll</HintPath>
- </Reference>
- <Reference Include="YarnSpinner.Compiler">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/YarnSpinner.Compiler.dll</HintPath>
- </Reference>
- <Reference Include="Google.Protobuf">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/Google.Protobuf.dll</HintPath>
- </Reference>
  <Reference Include="Antlr4.Runtime.Standard">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/Antlr4.Runtime.Standard.dll</HintPath>
- </Reference>
- <Reference Include="System.Runtime.CompilerServices.Unsafe">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
  </Reference>
  <Reference Include="CsvHelper">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/CsvHelper.dll</HintPath>
  </Reference>
+ <Reference Include="Google.Protobuf">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/Google.Protobuf.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Buffers">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Buffers.dll</HintPath>
+ </Reference>
  <Reference Include="System.Memory">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Memory.dll</HintPath>
  </Reference>
- <Reference Include="YarnSpinner">
- <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/YarnSpinner.dll</HintPath>
- </Reference>
  <Reference Include="System.Numerics.Vectors">
  <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Numerics.Vectors.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Reflection.TypeExtensions">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Reflection.TypeExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.CompilerServices.Unsafe">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+ </Reference>
+ <Reference Include="YarnSpinner.Compiler">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/YarnSpinner.Compiler.dll</HintPath>
+ </Reference>
+ <Reference Include="YarnSpinner">
+ <HintPath>C:/Users/trixe/Documents/Game Development/Trixelbit Arcade/Cavern of Stars/Repo/Cavern-of-Stars/Library/PackageCache/dev.yarnspinner.unity@7e42641d65/Runtime/DLLs/YarnSpinner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.11f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

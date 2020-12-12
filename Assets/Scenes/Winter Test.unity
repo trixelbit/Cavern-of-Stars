@@ -21387,7 +21387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1504264061403506188}
   m_Layer: 0
-  m_Name: Start Point
+  m_Name: Player + Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21819,7 +21819,6 @@ GameObject:
   - component: {fileID: 1504264062596923337}
   - component: {fileID: 1504264062596923338}
   - component: {fileID: 1504264062596923350}
-  - component: {fileID: 1504264062596923349}
   - component: {fileID: 1504264062596923339}
   m_Layer: 0
   m_Name: Player
@@ -21828,18 +21827,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1504264062596923349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504264062596923340}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3982db6a03918de4984e78ce0aa9efbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1504264062596923350
 Rigidbody:
   m_ObjectHideFlags: 0

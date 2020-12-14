@@ -6,10 +6,15 @@ public class FollowPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject target;
+    public GameObject position;
     public float CameraSpeed = .2f;
     private Vector3 Offset, TargetPosition;
 
 
+    void Awake()
+    {
+        SessionData.Camera = gameObject;
+    }
 
     void Start()
     {

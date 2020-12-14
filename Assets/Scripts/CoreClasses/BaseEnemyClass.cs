@@ -7,7 +7,6 @@ public class BaseEnemyClass : MonoBehaviour
     public int HP = 6;
     public int KnockBackValue = 1;
 
-
     public AudioClip SoundHurt;
 
     public GameObject SpritePlane;

@@ -8,6 +8,7 @@ public class CharacterRenderer : MonoBehaviour
 {
     public GameObject Parent;
 
+    public bool Billboard = true;
 
     // sprites sets
     public OctaSpriteSet idle;
@@ -57,11 +58,16 @@ public class CharacterRenderer : MonoBehaviour
                 {
                     Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
                 }
-
                 break;
         }
 
         Sprite.Render();
+
+        if (Billboard)
+        {
+            transform.LookAt(Camera.main.transform);
+            transform.rotation *= Quaternion.Euler(90, 0, 0);
+        }
     }
 
 

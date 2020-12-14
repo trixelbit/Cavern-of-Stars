@@ -21,6 +21,7 @@ public static class SessionData
 
 
     //World Settings
+    public static GameObject Camera;
     public static bool Lock = false;
     
     //

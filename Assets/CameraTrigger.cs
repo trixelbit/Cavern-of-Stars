@@ -5,15 +5,17 @@ using UnityEngine;
 public class CameraTrigger : MonoBehaviour
 {
     public GameObject CameraTarget;
-
+    public float RotationSpeed = .08f;
+    public float MovementSpeed = .2f;
     // Start is called before the first frame update
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
         {
-            SessionData.Camera.GetComponent<CameraController>().position = CameraTarget;
-            SessionData.Camera.GetComponent<CameraController>().InvokeLock();
+            var cameraController = SessionData.Camera.GetComponent<CameraController>();
+            cameraController.InvokeLock(CameraTarget, RotationSpeed, MovementSpeed);
+
         }
     }
 }

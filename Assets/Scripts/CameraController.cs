@@ -7,7 +7,8 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     public GameObject target;
     public GameObject position;
-    public float CameraSpeed = .2f;
+    public float MovementSpeed = .2f;
+    public float RotationSpeed = .08f;
     public bool IsRotationLocked = true;
 
     private bool Transitioning = false;
@@ -29,24 +30,23 @@ public class CameraController : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, position.transform.position, Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, .2f)));
 
-            if (Vector3.Distance(transform.position, position.transform.position) < 2)
+            if (Vector3.Distance(transform.position, position.transform.position) < 5)
             {
                 LockCameraRotation();
             }
-
-
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, position.transform.position, CameraSpeed);
+            transform.position = Vector3.Lerp(transform.position, position.transform.position, MovementSpeed);
         }
-
 
         // look at target
         if (!IsRotationLocked)
         {
             // smooth rotation
-            //transform.rotation = Quaternion.Slerp(transform.rotation, , .1 * Time.deltaTime);
+            //transform.LookAt(SessionData.Player.transform);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(SessionData.Player.transform.position - transform.position), RotationSpeed );
+            //transform.rotation = Quaternion.LookRotation(SessionData.Player.transform.position - transform.position);
         }
     }
 
@@ -57,8 +57,11 @@ public class CameraController : MonoBehaviour
     }
 
     // begin camera transition
-    public void InvokeLock()
+    public void InvokeLock(GameObject target, float rotationSpeed, float movementSpeed)
     {
+        position = target;
+        RotationSpeed = rotationSpeed;
+        MovementSpeed = movementSpeed;
         IsRotationLocked = false;
         Transitioning = true;
     }

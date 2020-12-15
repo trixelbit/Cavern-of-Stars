@@ -7,57 +7,60 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     public GameObject target;
     public GameObject position;
-    public GameObject position1;
-    public GameObject position2;
     public float CameraSpeed = .2f;
     public bool IsRotationLocked = true;
 
+    private bool Transitioning = false;
 
     void Awake()
     {
         SessionData.Camera = gameObject;
     }
 
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            position = position1;
-            InvokeLock();
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            position = position2;
-            InvokeLock();
-        }
 
         //lerp to position
-        transform.position = Vector3.Lerp( transform.position, position.transform.position, CameraSpeed );
+        
+
+        if (Transitioning)
+        {
+            transform.position = Vector3.Lerp(transform.position, position.transform.position, Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, .2f)));
+
+            if (Vector3.Distance(transform.position, position.transform.position) < 2)
+            {
+                LockCameraRotation();
+            }
+
+
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, position.transform.position, CameraSpeed);
+        }
+
 
         // look at target
         if (!IsRotationLocked)
         {
-            transform.LookAt(target.transform);
+            // smooth rotation
+            //transform.rotation = Quaternion.Slerp(transform.rotation, , .1 * Time.deltaTime);
         }
     }
 
     public void LockCameraRotation()
     {
+        Transitioning = false;
         IsRotationLocked = true;
     }
 
+    // begin camera transition
     public void InvokeLock()
     {
         IsRotationLocked = false;
-        Invoke("LockCameraRotation", .5f);
+        Transitioning = true;
     }
 
 }

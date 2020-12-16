@@ -13,7 +13,9 @@ public class ItemPickUp : MonoBehaviour
 
     public ItemType Type;
     public float Value = 1;
-    public float HorizontalRotationSpeed; 
+    public float HorizontalRotationSpeed = 1;
+
+    public GameObject SpriteQuad;
 
 
     void Start()
@@ -24,7 +26,10 @@ public class ItemPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SpriteQuad.transform.position += Vector3.up * .01f * Mathf.Sin(Time.time * 3);
+        SpriteQuad.transform.rotation *= Quaternion.AngleAxis( HorizontalRotationSpeed , Vector3.up);
+        transform.LookAt(SessionData.Camera.transform);
+
     }
 
     private void OnTriggerEnter(Collider other)

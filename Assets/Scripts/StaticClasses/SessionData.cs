@@ -12,7 +12,7 @@ public static class SessionData
     public static float RunSpeed = 14;
 
     public static bool DashUnlocked = true;
-    public static float DashSpeed = 20;
+    public static float DashSpeed = 40;
     
     public static int ComboCount = 0;
     public static float ComboTimeStamp = 0;
@@ -25,12 +25,15 @@ public static class SessionData
     public static bool Lock = false;
     
     //
-
-
-
-
-
-
     
-
 }
+
+
+public class Level
+{
+    public string SceneName;
+    public bool Active;
+    public Level Previous;
+    public Level Next;
+}
+

@@ -38,36 +38,27 @@ public class movement : MonoBehaviour
 
     public Direction Direction = Direction.down;
     public State CharacterState = State.idle;
+    public bool Invincible = false;
 
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;
 
     public GameObject Slash1;
 
-
+    #region Unity Behaviors
     private void Awake()
     {
         PlayerActionControl = new PlayerContolBridge();
         SessionData.Player = gameObject;
     }
-    private void OnEnable()
-    {
-        PlayerActionControl.Enable();
-        
-    }
-    private void OnDisable()
-    {
-        PlayerActionControl.Disable();
-    }
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         
         PlayerActionControl.InGame.Attack1.performed += _ => LightSlash();
+        PlayerActionControl.InGame.Dash.performed += _ => StartDash();
     }
-    
-
 
     // Update is called once per frame
     void FixedUpdate()
@@ -82,11 +73,9 @@ public class movement : MonoBehaviour
         // state checks
         if (!stun)
         {
-
             // kinetic motion
-            if (State.slash != CharacterState)
+            if (State.slash != CharacterState && State.dash != CharacterState)
             {
-
                 // directino input-
                 if (HorizontalInput != 0 && VerticalInput != 0)
                 {
@@ -114,13 +103,25 @@ public class movement : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        //Damage From Enemies
         if (other.tag == "Enemy")
         {
             DamagePlayer(other.transform.position);
         }
     }
+    private void OnEnable()
+    {
+        PlayerActionControl.Enable();
 
+    }
+    private void OnDisable()
+    {
+        PlayerActionControl.Disable();
+    }
 
+    #endregion
+
+    #region Player Actions
     private void LightSlash()
     {
         if ( CharacterState != State.slash || SessionData.ComboCount > 0)
@@ -133,11 +134,33 @@ public class movement : MonoBehaviour
         }
     }
 
+    private void StartDash()
+    {
+        Invincible = true;
+        if (CharacterState != State.slash && CharacterState != State.dash && SessionData.DashUnlocked)
+        {
+            CharacterState = State.dash;
+            rb.useGravity = false;
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, SessionData.DashSpeed);
+            Invoke("EndDash", .1f);
+        }
+    }
+
+    private void EndDash()
+    {
+        rb.useGravity = true;
+        Invincible = false;
+        CharacterState = State.idle;
+    }
+
     private void ResetStun()
     {
         stun = false;
     }
 
+    #endregion
+
+    #region Helper Functions
     private Vector3 Vector3FromDirectionMagnitude(Direction direction, float magnitude)
     {
         Vector3 result = new Vector3(0,0,0);
@@ -277,5 +300,5 @@ public class movement : MonoBehaviour
         }
     }
 
- 
+    #endregion
 }

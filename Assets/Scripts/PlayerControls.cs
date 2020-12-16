@@ -41,6 +41,14 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e348e8a-4175-4ff1-a7ac-1e89581c314f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -197,6 +205,28 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                     ""action"": ""Attack1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ce0fcc5-eb34-4160-a6db-ea48e4af6796"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56554855-93d9-426c-bf2f-342dc64deb4c"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -220,6 +250,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
         m_InGame_Vertical = m_InGame.FindAction("Vertical", throwIfNotFound: true);
         m_InGame_Horizontal = m_InGame.FindAction("Horizontal", throwIfNotFound: true);
         m_InGame_Attack1 = m_InGame.FindAction("Attack1", throwIfNotFound: true);
+        m_InGame_Dash = m_InGame.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -272,6 +303,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
     private readonly InputAction m_InGame_Vertical;
     private readonly InputAction m_InGame_Horizontal;
     private readonly InputAction m_InGame_Attack1;
+    private readonly InputAction m_InGame_Dash;
     public struct InGameActions
     {
         private @PlayerContolBridge m_Wrapper;
@@ -279,6 +311,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
         public InputAction @Vertical => m_Wrapper.m_InGame_Vertical;
         public InputAction @Horizontal => m_Wrapper.m_InGame_Horizontal;
         public InputAction @Attack1 => m_Wrapper.m_InGame_Attack1;
+        public InputAction @Dash => m_Wrapper.m_InGame_Dash;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,6 +330,9 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                 @Attack1.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnAttack1;
                 @Attack1.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnAttack1;
                 @Attack1.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnAttack1;
+                @Dash.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,6 +346,9 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                 @Attack1.started += instance.OnAttack1;
                 @Attack1.performed += instance.OnAttack1;
                 @Attack1.canceled += instance.OnAttack1;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -328,5 +367,6 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnHorizontal(InputAction.CallbackContext context);
         void OnAttack1(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

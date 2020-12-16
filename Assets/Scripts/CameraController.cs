@@ -44,9 +44,7 @@ public class CameraController : MonoBehaviour
         if (!IsRotationLocked)
         {
             // smooth rotation
-            //transform.LookAt(SessionData.Player.transform);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(SessionData.Player.transform.position - transform.position), RotationSpeed );
-            //transform.rotation = Quaternion.LookRotation(SessionData.Player.transform.position - transform.position);
         }
     }
 

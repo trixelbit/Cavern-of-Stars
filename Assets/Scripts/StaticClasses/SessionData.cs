@@ -18,6 +18,8 @@ public static class SessionData
     public static int ComboCount = 0;
     public static float ComboTimeStamp = 0;
 
+    // Items
+    public static int KeyCount = 0;
 
 
     //World Settings

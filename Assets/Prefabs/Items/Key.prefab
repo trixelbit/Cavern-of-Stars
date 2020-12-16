@@ -208,7 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Value: 1
-  HorizontalRotationSpeed: 2
+  HorizontalRotationSpeed: 100
+  OscAmplitude: 0.12
+  OscFrequency: 4
   SpriteQuad: {fileID: 5496567652379178845}
 --- !u!1 &5496567652790429657
 GameObject:

@@ -14,13 +14,11 @@ public static class SessionData
     public static bool DashUnlocked = true;
     public static float DashSpeed = 20;
     
-    
     public static int ComboCount = 0;
     public static float ComboTimeStamp = 0;
 
     // Items
     public static int KeyCount = 0;
-
 
     //World Settings
     public static GameObject Camera;

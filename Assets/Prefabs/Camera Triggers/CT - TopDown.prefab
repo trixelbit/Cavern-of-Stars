@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9205946971048992596}
   - component: {fileID: 9205946971048992599}
   m_Layer: 0
-  m_Name: CameraTrigger - TopDown
+  m_Name: CT - TopDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   CameraTarget: {fileID: 0}
   RotationSpeed: 0.08
   MovementSpeed: 0.2
+  camType: 0

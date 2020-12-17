@@ -47,6 +47,7 @@ public class CharacterRenderer : MonoBehaviour
             case State.running:
                 Sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.SpriteNormals[(int)Direction], run.FrameCount, run.ImageSpeed, true, true);
                 break;
+
             case State.slash:
                 if (Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] && Sprite.Completed)
                 {
@@ -56,8 +57,13 @@ public class CharacterRenderer : MonoBehaviour
                 }
                 else
                 {
+                    
                     Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
                 }
+                break;
+
+            case State.dash:
+                Sprite.UpdateSprite(dash.SpriteSheets[(int)Direction], null, dash.FrameCount, dash.ImageSpeed, true, true);
                 break;
         }
 

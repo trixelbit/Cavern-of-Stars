@@ -22137,7 +22137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &1504264062596923336
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -22221,6 +22221,7 @@ MonoBehaviour:
   FrictionPercent: 0.01
   Direction: 0
   CharacterState: 0
+  Invincible: 0
   Slash1: {fileID: 7608800926821867469, guid: 50ae56a1b1b8d0b428dcc70fedd5fe59, type: 3}
 --- !u!1 &1504264062596923340
 GameObject:
@@ -22337,10 +22338,26 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 7fe14dddb94cb5d4e9ab1ccdf88b51b1, type: 3}
     - {fileID: 2800000, guid: 2d18f2fc4b83dd24f9eaceb743b7e8df, type: 3}
   dash:
-    FrameCount: 0
+    FrameCount: 1
     ImageSpeed: 0
-    SpriteSheets: []
-    SpriteNormals: []
+    SpriteSheets:
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    SpriteNormals:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   slash:
     FrameCount: 7
     ImageSpeed: 25

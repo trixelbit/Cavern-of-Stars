@@ -27,7 +27,6 @@ public enum State
 
 public class movement : MonoBehaviour
 {   
-    
     public Rigidbody rb;
     public GameObject SpritePlane;
     public GameObject HurtVFX;
@@ -124,7 +123,7 @@ public class movement : MonoBehaviour
     #region Player Actions
     private void LightSlash()
     {
-        if ( CharacterState != State.slash || SessionData.ComboCount > 0)
+        if ( CharacterState != State.slash && CharacterState != State.dash || SessionData.ComboCount > 0)
         {
             CharacterState = State.slash;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
@@ -142,7 +141,7 @@ public class movement : MonoBehaviour
             CharacterState = State.dash;
             rb.useGravity = false;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, SessionData.DashSpeed);
-            Invoke("EndDash", .1f);
+            Invoke("EndDash", .3f);
         }
     }
 
@@ -160,7 +159,7 @@ public class movement : MonoBehaviour
 
     #endregion
 
-    #region Helper Functions
+    #region Utility Functions
     private Vector3 Vector3FromDirectionMagnitude(Direction direction, float magnitude)
     {
         Vector3 result = new Vector3(0,0,0);

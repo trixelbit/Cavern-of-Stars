@@ -122,11 +122,12 @@ public class Sprite
         if (texture.name != Renderer.sharedMaterial.mainTexture.name )
         {
             Renderer.material.SetTexture("_MainTex", texture);
+            Renderer.material.SetTexture("_EmissionMap", texture);
             if (normal != null)
             {
-                Renderer.material.SetTexture("_EmissionMap", texture);
+                Renderer.material.SetTexture("_BumpMap", normal);
             }
-            Renderer.material.SetTexture("_BumpMap", normal);
+            
             SpriteSheet = texture;
             Loop = loop;
             ImageIndex = 0;

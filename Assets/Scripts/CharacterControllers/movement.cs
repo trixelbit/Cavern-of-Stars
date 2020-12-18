@@ -141,7 +141,7 @@ public class movement : MonoBehaviour
             CharacterState = State.dash;
             rb.useGravity = false;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, SessionData.DashSpeed);
-            Invoke("EndDash", .3f);
+            Invoke("EndDash", .20f);
         }
     }
 
@@ -150,6 +150,7 @@ public class movement : MonoBehaviour
         rb.useGravity = true;
         Invincible = false;
         CharacterState = State.idle;
+        rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0,0,0), .5f);
     }
 
     private void ResetStun()

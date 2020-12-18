@@ -19,6 +19,8 @@ public class ItemPickUp : MonoBehaviour
 
     public GameObject SpriteQuad;
 
+    private bool Following = false;
+
 
     void Start()
     {
@@ -32,6 +34,15 @@ public class ItemPickUp : MonoBehaviour
         SpriteQuad.transform.rotation *= Quaternion.AngleAxis( HorizontalRotationSpeed * Time.deltaTime, Vector3.up) ;
         transform.LookAt(SessionData.Camera.transform);
 
+        // item will follow player
+        if (Following)
+        {
+            if (Vector3.Distance(transform.position, SessionData.Player.transform.position) > 2)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, SessionData.Player.transform.position, .1f);
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,7 +53,8 @@ public class ItemPickUp : MonoBehaviour
             {
                 case ItemType.Key:
                     SessionData.KeyCount += (int)Value;
-                    Destroy(gameObject);
+                    GetComponent<SphereCollider>().enabled = false;
+                    Following = true;
                     break;
 
                 case ItemType.Health:

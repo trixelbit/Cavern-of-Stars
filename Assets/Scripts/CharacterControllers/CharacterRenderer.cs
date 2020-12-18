@@ -56,14 +56,13 @@ public class CharacterRenderer : MonoBehaviour
                     Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], idle.FrameCount, idle.ImageSpeed, true, true);
                 }
                 else
-                {
-                    
+                {   
                     Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
                 }
                 break;
 
             case State.dash:
-                Sprite.UpdateSprite(dash.SpriteSheets[(int)Direction], null, dash.FrameCount, dash.ImageSpeed, true, true);
+                Sprite.UpdateSprite(dash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], dash.FrameCount, dash.ImageSpeed, true, true);
                 break;
         }
 

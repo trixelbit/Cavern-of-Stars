@@ -30,14 +30,15 @@ public class CameraController : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, position.transform.position, Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, .2f)));
 
-            if (Vector3.Distance(transform.position, position.transform.position) < 5)
+            if (Vector3.Distance(transform.position, position.transform.position) < 1)
             {
                 LockCameraRotation();
             }
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, position.transform.position, MovementSpeed);
+            transform.position = Vector3.Lerp(transform.position, position.transform.position, Mathf.SmoothStep(0.0f, 1.0f, Mathf.SmoothStep(0.0f, 1.0f, MovementSpeed)));
+            //transform.position = Vector3.Lerp(transform.position, position.transform.position, MovementSpeed);
         }
 
         // look at target

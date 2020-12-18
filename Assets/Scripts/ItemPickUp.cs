@@ -16,6 +16,7 @@ public class ItemPickUp : MonoBehaviour
     public float HorizontalRotationSpeed = 1;
     public float OscAmplitude = .012f;
     public float OscFrequency = 4;
+    public GameObject Target;
 
     public GameObject SpriteQuad;
 
@@ -35,11 +36,12 @@ public class ItemPickUp : MonoBehaviour
         transform.LookAt(SessionData.Camera.transform);
 
         // item will follow player
-        if (Following)
+        if (Following && Target != null)
         {
-            if (Vector3.Distance(transform.position, SessionData.Player.transform.position) > 2)
+            if (Vector3.Distance(transform.position, Target.transform.position) > 3)
             {
-                transform.position = Vector3.MoveTowards(transform.position, SessionData.Player.transform.position, .1f);
+                //transform.position = Vector3.MoveTowards(transform.position, SessionData.Player.transform.position, .1f);
+                transform.position = Vector3.Slerp(transform.position, Target.transform.position, .02f);
             }
         }
 
@@ -53,8 +55,10 @@ public class ItemPickUp : MonoBehaviour
             {
                 case ItemType.Key:
                     SessionData.KeyCount += (int)Value;
-                    GetComponent<SphereCollider>().enabled = false;
-                    Following = true;
+                    //GetComponent<SphereCollider>().enabled = false;
+                    //Following = true;
+                    //Target = SessionData.Player;
+                    DestroyItem();
                     break;
 
                 case ItemType.Health:
@@ -62,4 +66,12 @@ public class ItemPickUp : MonoBehaviour
             }
         }
     }
+
+
+    public void DestroyItem()
+    {
+        Destroy(gameObject);
+    }
+
+
 }

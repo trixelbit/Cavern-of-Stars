@@ -29,7 +29,7 @@ public class movement : MonoBehaviour
 {   
     public Rigidbody rb;
     public GameObject SpritePlane;
-    public GameObject HurtVFX;
+    
 
     public float RunSpeed;
     public float DashSpeed = 3;
@@ -39,10 +39,15 @@ public class movement : MonoBehaviour
     public State CharacterState = State.idle;
     public bool Invincible = false;
 
+    public GameObject Slash1;
+    public GameObject HurtVFX;
+    public GameObject DashParticleSystem;
+
+
+
+
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;
-
-    public GameObject Slash1;
 
     #region Unity Behaviors
     private void Awake()

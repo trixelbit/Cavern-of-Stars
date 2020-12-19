@@ -57,7 +57,7 @@ public class CharacterRenderer : MonoBehaviour
                 }
                 else
                 {   
-                    Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
+                    Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], slash.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
                 }
                 break;
 

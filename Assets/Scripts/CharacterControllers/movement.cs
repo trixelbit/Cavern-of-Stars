@@ -42,6 +42,7 @@ public class movement : MonoBehaviour
     public GameObject Slash1;
     public GameObject HurtVFX;
     public GameObject DashParticleSystem;
+    public GameObject VFXAfterImage;
 
 
 
@@ -54,6 +55,7 @@ public class movement : MonoBehaviour
     {
         PlayerActionControl = new PlayerContolBridge();
         SessionData.Player = gameObject;
+        DashParticleSystem.GetComponent<ParticleSystem>().Stop();
     }
     
     void Start()
@@ -143,10 +145,16 @@ public class movement : MonoBehaviour
         Invincible = true;
         if (CharacterState != State.slash && CharacterState != State.dash && SessionData.DashUnlocked)
         {
+            
             CharacterState = State.dash;
             rb.useGravity = false;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, SessionData.DashSpeed);
             Invoke("EndDash", .20f);
+            
+            DashParticleSystem.GetComponent<ParticleSystem>().Play();
+            VFXAfterImage.GetComponent<ParticleSystem>().Play();
+            DashParticleSystem.transform.rotation = Quaternion.Euler(DashParticleSystem.transform.rotation.x, AngleFromDirection(Direction), DashParticleSystem.transform.rotation.z);
+            VFXAfterImage.GetComponent<ParticleSystemRenderer>().material.mainTexture = SpritePlane.GetComponent<CharacterRenderer>().dash.SpriteSheets[(int)Direction];
         }
     }
 
@@ -156,6 +164,9 @@ public class movement : MonoBehaviour
         Invincible = false;
         CharacterState = State.idle;
         rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0,0,0), .5f);
+        
+        DashParticleSystem.GetComponent<ParticleSystem>().Stop();
+        VFXAfterImage.GetComponent<ParticleSystem>().Stop();
     }
 
     private void ResetStun()

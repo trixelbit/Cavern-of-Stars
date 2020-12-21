@@ -56,6 +56,7 @@ public class movement : MonoBehaviour
         PlayerActionControl = new PlayerContolBridge();
         SessionData.Player = gameObject;
         DashParticleSystem.GetComponent<ParticleSystem>().Stop();
+        VFXAfterImage.GetComponent<ParticleSystem>().Stop();
     }
     
     void Start()

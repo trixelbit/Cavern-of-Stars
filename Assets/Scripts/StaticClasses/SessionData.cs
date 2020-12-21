@@ -54,7 +54,7 @@ public static class SessionData
      *      |           |
      *      |           |
      *      |___________|
-     * [0,24]  [12,24]  [24,24]
+     * [0,24]  [12,24]  [23,23]
      *            ^
      *      Starting Room
      *    

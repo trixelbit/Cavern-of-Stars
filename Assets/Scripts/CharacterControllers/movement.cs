@@ -44,11 +44,13 @@ public class movement : MonoBehaviour
     public GameObject DashParticleSystem;
     public GameObject VFXAfterImage;
 
+    public Color DashTint;
 
 
 
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;
+    private Vector4 OriginalColor;
 
     #region Unity Behaviors
     private void Awake()
@@ -57,6 +59,8 @@ public class movement : MonoBehaviour
         SessionData.Player = gameObject;
         DashParticleSystem.GetComponent<ParticleSystem>().Stop();
         VFXAfterImage.GetComponent<ParticleSystem>().Stop();
+        OriginalColor = SpritePlane.GetComponent<Renderer>().material.GetColor("_EmissionColor");
+
     }
     
     void Start()
@@ -76,6 +80,9 @@ public class movement : MonoBehaviour
         float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
         bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
 
+        Color LerpedColor = Vector4.Lerp(SpritePlane.GetComponent<Renderer>().material.color, OriginalColor, .1f);
+        SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", LerpedColor);
+        SpritePlane.GetComponent<Renderer>().material.color = LerpedColor;
 
         // state checks
         if (!stun)
@@ -156,6 +163,9 @@ public class movement : MonoBehaviour
             VFXAfterImage.GetComponent<ParticleSystem>().Play();
             DashParticleSystem.transform.rotation = Quaternion.Euler(DashParticleSystem.transform.rotation.x, AngleFromDirection(Direction), DashParticleSystem.transform.rotation.z);
             VFXAfterImage.GetComponent<ParticleSystemRenderer>().material.mainTexture = SpritePlane.GetComponent<CharacterRenderer>().dash.SpriteSheets[(int)Direction];
+            
+            SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", DashTint);
+            SpritePlane.GetComponent<Renderer>().material.color = DashTint;
         }
     }
 
@@ -165,9 +175,11 @@ public class movement : MonoBehaviour
         Invincible = false;
         CharacterState = State.idle;
         rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0,0,0), .5f);
-        
         DashParticleSystem.GetComponent<ParticleSystem>().Stop();
         VFXAfterImage.GetComponent<ParticleSystem>().Stop();
+
+        //SpritePlane.GetComponent<Renderer>().material.color = OriginalColor;
+        //SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", OriginalColor);
     }
 
     private void ResetStun()

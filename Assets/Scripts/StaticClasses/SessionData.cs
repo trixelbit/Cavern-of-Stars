@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum OrientationInRoom
 { 
-    North,
-    South,
-    West,
-    East
+    North=0,
+    South=1,
+    West=2,
+    East=3
 };
 
 public enum World
@@ -45,16 +45,12 @@ public static class SessionData
 
     #region Room Traversal
 
-    public static Vector2 CurrentRoomCoord;
+    public static Vector2 CurrentRoomCoord = new Vector2(12,23);
     public static Vector3 CheckPointPosition;
     public static string CheckPointScene;
-    public static OrientationInRoom EntrancePoint;
+    public static OrientationInRoom EntrancePoint = OrientationInRoom.South;
 
-
-    /*
-     * 
-     * 
-     * 24 x 24 Rooms
+    /* 24 x 24 Worlds (24 scenes x 24 scenes)
      *
      * [0,0]
      *      _____________
@@ -74,6 +70,7 @@ public static class SessionData
     public static Level[,] Cavern;
     public static Level[,] City;
     public static Level[,] Castle;
+    public static GameObject[] ExitObjects = { null, null, null, null };
     #endregion
 }
 

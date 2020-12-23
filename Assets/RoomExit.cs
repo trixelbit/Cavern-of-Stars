@@ -8,6 +8,14 @@ public class RoomExit : MonoBehaviour
     public OrientationInRoom ExitDirection;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        SessionData.ExitObjects[(int)ExitDirection] = gameObject;
+        if (SessionData.EntrancePoint == ExitDirection)
+        {
+            SessionData.Player.transform.position = transform.GetChild(0).transform.position;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,19 +55,19 @@ public class RoomExit : MonoBehaviour
         switch (SessionData.CurrentWorld)
         {
             case World.Forest:
-                SceneManager.GetSceneByName(SessionData.Forest[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
+                SceneManager.LoadScene(SessionData.Forest[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
                 break;
 
             case World.Cavern:
-                SceneManager.GetSceneByName(SessionData.Cavern[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
+                SceneManager.LoadScene(SessionData.Cavern[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
                 break;
             
             case World.City:
-                SceneManager.GetSceneByName(SessionData.City[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
+                SceneManager.LoadScene(SessionData.City[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
                 break;
 
             case World.Castle:
-                SceneManager.GetSceneByName(SessionData.Castle[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
+                SceneManager.LoadScene(SessionData.Castle[(int)SessionData.CurrentRoomCoord.x, (int)SessionData.CurrentRoomCoord.y].SceneName);
                 break;
 
 

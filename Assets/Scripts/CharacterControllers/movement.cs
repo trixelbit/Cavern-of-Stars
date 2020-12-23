@@ -29,7 +29,6 @@ public class movement : MonoBehaviour
 {   
     public Rigidbody rb;
     public GameObject SpritePlane;
-    
 
     public float RunSpeed;
     public float DashSpeed = 3;
@@ -45,8 +44,6 @@ public class movement : MonoBehaviour
     public GameObject VFXAfterImage;
 
     public Color DashTint;
-
-
 
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;

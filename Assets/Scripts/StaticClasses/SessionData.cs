@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EntranceDirection
+public enum OrientationInRoom
 { 
-    top,
-    bottom,
-    left,
-    right
+    North,
+    South,
+    West,
+    East
+};
+
+public enum World
+{ 
+    Forest=0,
+    Cavern=1,
+    City=2,
+    Castle=3
 };
 
 
@@ -36,10 +44,11 @@ public static class SessionData
     #endregion
 
     #region Room Traversal
+
     public static Vector2 CurrentRoomCoord;
     public static Vector3 CheckPointPosition;
     public static string CheckPointScene;
-    public static EntranceDirection EntrancePoint;
+    public static OrientationInRoom EntrancePoint;
 
 
     /*
@@ -60,7 +69,7 @@ public static class SessionData
      *    
      */
 
-
+    public static World CurrentWorld;
     public static Level[,] Forest;
     public static Level[,] Cavern;
     public static Level[,] City;

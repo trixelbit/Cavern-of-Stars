@@ -61,6 +61,8 @@ public class movement : MonoBehaviour
         VFXAfterImage.GetComponent<ParticleSystem>().Stop();
         OriginalColor = SpritePlane.GetComponent<Renderer>().material.GetColor("_EmissionColor");
 
+
+
     }
     
     void Start()

@@ -41,7 +41,7 @@ public class BaseEnemyClass : MonoBehaviour
         GameObject VFX = Instantiate(HitVFX);
         VFX.transform.position = transform.position;
         SpritePlane.transform.position += new Vector3(Random.Range(-KnockBackValue, KnockBackValue), Random.Range(-KnockBackValue, KnockBackValue), Random.Range(-KnockBackValue, KnockBackValue));
-        transform.position = Vector3.MoveTowards(transform.position, SessionData.Player.transform.position, -2);
+        transform.position = Vector3.MoveTowards(transform.position, GlobalData.Player.transform.position, -2);
         HP -= damageDelt;
         Invoke("ResetCoolDownInvulnerability", .2f);
     }
@@ -68,16 +68,16 @@ public class BaseEnemyClass : MonoBehaviour
 
     public void ResetComboCount()
     {
-        SessionData.ComboCount = 0;
-        SessionData.ComboTimeStamp = 0;   
+        GlobalData.ComboCount = 0;
+        GlobalData.ComboTimeStamp = 0;   
     }
 
     public void AddToComboCount()
     {
-        if (SessionData.ComboCount == 0 || 0.1f > Time.time - SessionData.ComboTimeStamp)
+        if (GlobalData.ComboCount == 0 || 0.1f > Time.time - GlobalData.ComboTimeStamp)
         {
-            SessionData.ComboCount++;
-            SessionData.ComboTimeStamp = Time.time;
+            GlobalData.ComboCount++;
+            GlobalData.ComboTimeStamp = Time.time;
             Invoke("ResetComboCount", 0.01f);
         }
     }

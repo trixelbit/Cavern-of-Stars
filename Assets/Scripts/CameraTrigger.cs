@@ -24,16 +24,16 @@ public class CameraTrigger : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            var cameraController = SessionData.Camera.GetComponent<CameraController>();
+            var cameraController = GlobalData.Camera.GetComponent<CameraController>();
             
             switch(camType)
             {
                 case CameraType.SideView:
-                    cameraController.InvokeLock(SessionData.Player.transform.GetChild(1).gameObject, RotationSpeed, MovementSpeed);
+                    cameraController.InvokeLock(GlobalData.Player.transform.GetChild(1).gameObject, RotationSpeed, MovementSpeed);
                     break;
 
                 case CameraType.Topdown:
-                    cameraController.InvokeLock(SessionData.Player.transform.GetChild(0).gameObject, RotationSpeed, MovementSpeed);
+                    cameraController.InvokeLock(GlobalData.Player.transform.GetChild(0).gameObject, RotationSpeed, MovementSpeed);
                     break;
 
                 default:

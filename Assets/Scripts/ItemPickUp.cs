@@ -33,7 +33,7 @@ public class ItemPickUp : MonoBehaviour
     {
         SpriteQuad.transform.position += Vector3.up * OscAmplitude * Mathf.Sin(Time.time * OscFrequency) * Time.deltaTime;
         SpriteQuad.transform.rotation *= Quaternion.AngleAxis( HorizontalRotationSpeed * Time.deltaTime, Vector3.up) ;
-        transform.LookAt(SessionData.Camera.transform);
+        transform.LookAt(GlobalData.Camera.transform);
 
         // item will follow player
         if (Following && Target != null)
@@ -54,7 +54,7 @@ public class ItemPickUp : MonoBehaviour
             switch (Type)
             {
                 case ItemType.Key:
-                    SessionData.KeyCount += (int)Value;
+                    GlobalData.KeyCount += (int)Value;
                     //GetComponent<SphereCollider>().enabled = false;
                     //Following = true;
                     //Target = SessionData.Player;

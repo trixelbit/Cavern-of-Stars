@@ -15,7 +15,7 @@ public class EnemyFloaterClass : BaseEnemyClass
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, SessionData.Player.transform.position) < 30)
+        if (Vector3.Distance(transform.position, GlobalData.Player.transform.position) < 30)
         {
             FloaterMovement();
             Faceplayer();
@@ -47,7 +47,7 @@ public class EnemyFloaterClass : BaseEnemyClass
     {
         int flip = 1;
         
-        if (SessionData.Player.transform.position.x > transform.position.x)
+        if (GlobalData.Player.transform.position.x > transform.position.x)
         {
             flip = 1;
         }
@@ -75,7 +75,7 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     public void FloaterMovement()
     {
-        transform.position = Vector3.MoveTowards( transform.position, SessionData.Player.transform.position,.01f);
+        transform.position = Vector3.MoveTowards( transform.position, GlobalData.Player.transform.position,.01f);
 
     }
 

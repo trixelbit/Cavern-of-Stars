@@ -10,7 +10,7 @@ public class HealthBarDrawer : MonoBehaviour
     public float HorizontalSpacing = 10;
     public Vector2 Offset = new Vector2(0, 1080);
 
-    private GameObject[] HeartSprites = new GameObject[SessionData.HealthCap];
+    private GameObject[] HeartSprites = new GameObject[GlobalData.HealthCap];
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class HealthBarDrawer : MonoBehaviour
         Offset.y -= HeartSprite.GetComponent<RectTransform>().rect.height / 2;
 
         // heart containers
-        for (int i = 0; i < SessionData.HealthCap; i++)
+        for (int i = 0; i < GlobalData.HealthCap; i++)
         {
             ObjectReference = Instantiate(BackSprite);
             ObjectReference.transform.SetParent(gameObject.transform);
@@ -30,7 +30,7 @@ public class HealthBarDrawer : MonoBehaviour
         }
 
         // hearts
-        for (int i = 0; i < SessionData.HealthCap; i++)
+        for (int i = 0; i < GlobalData.HealthCap; i++)
         {
             ObjectReference = Instantiate(HeartSprite);
             ObjectReference.transform.SetParent(gameObject.transform);
@@ -44,9 +44,9 @@ public class HealthBarDrawer : MonoBehaviour
     void Update()
     {
         // update heart containers
-        for(int i = 0; i < SessionData.HealthCap; i++)
+        for(int i = 0; i < GlobalData.HealthCap; i++)
         {
-            if ( i < SessionData.Health )
+            if ( i < GlobalData.Health )
             {
                 HeartSprites[i].SetActive(true);
             }

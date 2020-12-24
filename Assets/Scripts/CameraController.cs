@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        SessionData.Camera = gameObject;
+        GlobalData.Camera = gameObject;
     }
 
 
@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
         if (!IsRotationLocked)
         {
             // smooth rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(SessionData.Player.transform.position - transform.position), RotationSpeed );
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(GlobalData.Player.transform.position - transform.position), RotationSpeed );
         }
     }
 

@@ -44,9 +44,9 @@ public class LockedGateTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (SessionData.KeyCount > 0 && Locked)
+            if (GlobalData.KeyCount > 0 && Locked)
             {
-                SessionData.KeyCount--;
+                GlobalData.KeyCount--;
                 Locked = false;
             }
         }

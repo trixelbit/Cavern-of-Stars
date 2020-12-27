@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
     <Compile Include="Assets\Developers\Huen\rotatingSaw.cs" />
     <Compile Include="Assets\Developers\Huen\oscillatingSaw.cs" />
+    <Compile Include="Assets\Developers\Huen\spinningSaw.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Art\Old Test Files\terrain\NewSurfaceShader.shader" />

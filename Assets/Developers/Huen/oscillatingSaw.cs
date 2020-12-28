@@ -13,7 +13,7 @@ public class oscillatingSaw : MonoBehaviour
     public float speed = 3f;
 
     [Header("Gizmos Properties")]
-    public float sphereSize = 1f;
+    [Range (0,3)]public float sphereSize = 1f;
 
     public Transform startPos;
 

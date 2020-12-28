@@ -5,16 +5,9 @@ using UnityEditor;
 
 public class rotatingSaw : MonoBehaviour
 {
-    [Header("Dependencies")]
-    public Transform origin;
-
-    [Header("Saw Properties")]
-    public float rotationSpeed = 30f;
-
     [Header("Gizmos Properties")]
-    public float sphereSize = 1f;
+    [Range (0,3)]public float sphereSize = 1f;
 
-    public bool clockwise = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +17,6 @@ public class rotatingSaw : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (clockwise)
-        {
-            origin.transform.Rotate(Vector3.left * -rotationSpeed * Time.deltaTime);
-        }
-
-        if (!clockwise)
-        {
-            origin.transform.Rotate(Vector3.left * rotationSpeed * Time.deltaTime);
-        }
     }
 
     private void OnDrawGizmos()
@@ -41,11 +25,11 @@ public class rotatingSaw : MonoBehaviour
 
         //Gizmos
         Gizmos.color = setColor;
-        Gizmos.DrawLine(origin.position, transform.position);
-        Gizmos.DrawWireSphere(origin.position, sphereSize);
+        Gizmos.DrawLine(transform.position, transform.position);
+        Gizmos.DrawWireSphere(transform.position, sphereSize);
 
         //Handles
         Handles.color = setColor;
-        Handles.Label(origin.position, "Origin");
+        Handles.Label(transform.position, "Origin");
     }
 }

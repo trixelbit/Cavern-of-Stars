@@ -9,12 +9,12 @@ public class WorldSorter : MonoBehaviour
     void Awake()
     {
         // initialize worlds
-        SessionData.Forest = new Level[24, 24];
+        GlobalData.Forest = new Level[24, 24];
         for (int i = 0; i < 24; i++)
         {
             for (int j = 0; j < 24; j++)
             {
-                SessionData.Forest[i, j] = new Level("_");
+                GlobalData.Forest[i, j] = new Level("_");
             }
 
         }
@@ -32,19 +32,19 @@ public class WorldSorter : MonoBehaviour
             switch (World)
             {
                 case 'A':
-                    SessionData.Forest[XCoord, YCoord].SceneName = TempName;
+                    GlobalData.Forest[XCoord, YCoord].SceneName = TempName;
                     break;
 
                 case 'B':
-                    SessionData.Cavern[XCoord, YCoord].SceneName = TempName;
+                    GlobalData.Cavern[XCoord, YCoord].SceneName = TempName;
                     break;
 
                 case 'C':
-                    SessionData.City[XCoord, YCoord].SceneName = TempName;
+                    GlobalData.City[XCoord, YCoord].SceneName = TempName;
                     break;
 
                 case 'D':
-                    SessionData.Castle[XCoord, YCoord].SceneName = TempName;
+                    GlobalData.Castle[XCoord, YCoord].SceneName = TempName;
                     break;
             }
         }
@@ -67,13 +67,13 @@ public class WorldSorter : MonoBehaviour
             buffer += "[";
             for (int j = 0; j < 24; j++)
             {
-                if (SessionData.Forest[j, i].SceneName[0] != '_')
+                if (GlobalData.Forest[j, i].SceneName[0] != '_')
                 {
                     buffer += "#";
                 }
                 else
                 {
-                    buffer += SessionData.Forest[j, i].SceneName[0];
+                    buffer += GlobalData.Forest[j, i].SceneName[0];
                 }
 
 

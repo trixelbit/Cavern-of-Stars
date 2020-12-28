@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class SceneFade : MonoBehaviour
 {
     public bool Visible = false;
-    public float TransitionSpeed = 10;
+    public float TransitionSpeed = 15;
     private Image image;
 
     // Start is called before the first frame update
     void Awake()
     {
+        GlobalData.BlackScreen = gameObject;
         image = GetComponent<Image>();
         
     }

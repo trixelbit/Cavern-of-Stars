@@ -29,7 +29,6 @@ public class movement : MonoBehaviour
 {   
     public Rigidbody rb;
     public GameObject SpritePlane;
-    
 
     public float RunSpeed;
     public float DashSpeed = 3;
@@ -46,8 +45,6 @@ public class movement : MonoBehaviour
 
     public Color DashTint;
 
-
-
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;
     private Vector4 OriginalColor;
@@ -55,8 +52,8 @@ public class movement : MonoBehaviour
     #region Unity Behaviors
     private void Awake()
     {
+        GlobalData.Player = gameObject;
         PlayerActionControl = new PlayerContolBridge();
-        SessionData.Player = gameObject;
         DashParticleSystem.GetComponent<ParticleSystem>().Stop();
         VFXAfterImage.GetComponent<ParticleSystem>().Stop();
         OriginalColor = SpritePlane.GetComponent<Renderer>().material.GetColor("_EmissionColor");
@@ -140,7 +137,7 @@ public class movement : MonoBehaviour
     #region Player Actions
     private void LightSlash()
     {
-        if ( CharacterState != State.slash && CharacterState != State.dash || SessionData.ComboCount > 0)
+        if ( CharacterState != State.slash && CharacterState != State.dash || GlobalData.ComboCount > 0)
         {
             CharacterState = State.slash;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
@@ -153,12 +150,12 @@ public class movement : MonoBehaviour
     private void StartDash()
     {
         Invincible = true;
-        if (CharacterState != State.slash && CharacterState != State.dash && SessionData.DashUnlocked)
+        if (CharacterState != State.slash && CharacterState != State.dash && GlobalData.DashUnlocked)
         {
             
             CharacterState = State.dash;
             rb.useGravity = false;
-            rb.velocity = Vector3FromDirectionMagnitude(Direction, SessionData.DashSpeed);
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, GlobalData.DashSpeed);
             Invoke("EndDash", .20f);
             
             DashParticleSystem.GetComponent<ParticleSystem>().Play();
@@ -326,8 +323,8 @@ public class movement : MonoBehaviour
             stun = true;
             Invoke("ResetStun", .3f);
             rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
-            SessionData.Health--;
-            Debug.Log(SessionData.Health);
+            GlobalData.Health--;
+            Debug.Log(GlobalData.Health);
         }
     }
 

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\CoreClasses\EnemyFloaterClass.cs" />
     <Compile Include="Assets\Scripts\oscillatingSaw.cs" />
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
+    <Compile Include="Assets\Developers\Huen\BulletSystem.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Art\Old Test Files\terrain\NewSurfaceShader.shader" />

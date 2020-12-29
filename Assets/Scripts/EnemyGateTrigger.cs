@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockedGateTrigger : MonoBehaviour
+public class EnemyGateTrigger : MonoBehaviour
 {
     public bool Locked = true;
     public float MovementSpeed = .1f;
@@ -17,14 +17,14 @@ public class LockedGateTrigger : MonoBehaviour
         InitialPosition = transform.position;
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
+        Locked = GlobalData.EnemyCount <= 0 ? false : true;
+
         if (!Locked)
         {
-            if (Vector3.Distance(transform.position, InitialPosition) < SinkDistance )
+            if (Vector3.Distance(transform.position, InitialPosition) < SinkDistance)
             {
                 transform.position += Vector3.down * MovementSpeed;
                 Vector3 Offset = new Vector3( InitialPosition.x + Random.Range( -ShakeAmount, ShakeAmount), transform.position.y, InitialPosition.z + Random.Range( -ShakeAmount, ShakeAmount));
@@ -40,16 +40,4 @@ public class LockedGateTrigger : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + (Vector3.down * SinkDistance), 1);
     }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            if (GlobalData.KeyCount > 0 && Locked)
-            {
-                GlobalData.KeyCount--;
-                Locked = false;
-            }
-        }
-    }
 }

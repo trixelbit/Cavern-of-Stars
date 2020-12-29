@@ -18,7 +18,6 @@ public enum World
     Castle=3
 };
 
-
 public static class GlobalData
 {
     #region Player Information
@@ -41,6 +40,7 @@ public static class GlobalData
     #region World State
     public static GameObject Camera;
     public static bool Lock = false;
+    public static int EnemyCount = 0;
     #endregion
 
     #region Room Traversal

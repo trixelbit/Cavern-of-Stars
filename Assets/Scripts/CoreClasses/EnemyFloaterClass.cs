@@ -22,7 +22,6 @@ public class EnemyFloaterClass : BaseEnemyClass
         }
         
         CheckHP();
-        
         OscilateSpritePlane();
         LerpBackToPosition();
     }
@@ -61,6 +60,7 @@ public class EnemyFloaterClass : BaseEnemyClass
 
     public override void Death() 
     {
+        GlobalData.EnemyCount--;
         Haze.GetComponent<ParticleSystem>().Stop();
         Haze.transform.parent = null;
         Destroy(Haze, 5);

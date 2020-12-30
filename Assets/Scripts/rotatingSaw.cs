@@ -29,7 +29,7 @@ public class rotatingSaw : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sphereSize);
 
         //Handles
-        Handles.color = setColor;
-        Handles.Label(transform.position, "Origin");
+        //Handles.color = setColor;
+        //Handles.Label(transform.position, "Origin");
     }
 }

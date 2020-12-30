@@ -78,8 +78,8 @@ public class oscillatingSaw : MonoBehaviour
         Gizmos.DrawWireSphere(LinePointB.position, sphereSize);
 
         //Handles
-        Handles.color = setColor;
-        Handles.Label(posA.position, "Point A");
-        Handles.Label(posB.position, "Point B");
+        //Handles.color = setColor;
+        //Handles.Label(posA.position, "Point A");
+        //Handles.Label(posB.position, "Point B");
     }
 }

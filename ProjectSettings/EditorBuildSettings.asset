@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/The Forest/A12,23-StartingLevel 1.unity
     guid: 9f488464be3a1b34b806357792cadcd5
   - enabled: 1
-    path: Assets/Scenes/The Forest/A12,22-Room2.unity
-    guid: 4902b2454181d61479f86edb96e53c0a
+    path: Assets/Scenes/The Forest/A12,22 First Enemy.unity
+    guid: 85d9e2a94543a634b967b2fd2d1091e1
   m_configObjects: {}

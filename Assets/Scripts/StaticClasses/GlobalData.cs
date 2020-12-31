@@ -39,6 +39,7 @@ public static class GlobalData
 
     #region World State
     public static GameObject Camera;
+    public static GameObject GlobalMusicManager;
     public static bool Lock = false;
     public static int EnemyCount = 0;
     #endregion

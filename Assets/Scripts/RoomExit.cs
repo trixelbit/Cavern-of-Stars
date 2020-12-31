@@ -53,22 +53,41 @@ public class RoomExit : MonoBehaviour
 
         }
 
+        
+
         switch (GlobalData.CurrentWorld)
         {
             case World.Forest:
-                SceneManager.LoadScene(GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                //If room exists -> Load Scene By Name
+                if (GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName != "_")
+                {
+                    SceneManager.LoadScene(GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                }
+                else // If room doesn't exist -> fade back in
+                {
+                    GlobalData.BlackScreen.GetComponent<SceneFade>().Visible = true;
+                }
                 break;
 
             case World.Cavern:
-                SceneManager.LoadScene(GlobalData.Cavern[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                if (GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName != "_")
+                {
+                    SceneManager.LoadScene(GlobalData.Cavern[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                }
                 break;
             
             case World.City:
-                SceneManager.LoadScene(GlobalData.City[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                if (GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName != "_")
+                {
+                    SceneManager.LoadScene(GlobalData.City[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                }
                 break;
 
             case World.Castle:
-                SceneManager.LoadScene(GlobalData.Castle[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                if (GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName != "_")
+                {
+                    SceneManager.LoadScene(GlobalData.City[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                }
                 break;
         }
 

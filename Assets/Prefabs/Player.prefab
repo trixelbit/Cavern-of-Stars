@@ -162,6 +162,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walk: {fileID: 8300000, guid: 88ae577cad77f024680fbca060b4ebad, type: 3}
   Dash: {fileID: 0}
+  Slash:
+  - {fileID: 8300000, guid: 3e03a50650b58a94b9f40f75f8a74f11, type: 3}
+  - {fileID: 8300000, guid: 32980530edbc2d944a24856895eb92f9, type: 3}
+  - {fileID: 8300000, guid: e6c2a9aa02bf5664b9dbbea9f218bbb9, type: 3}
+  Hurt: {fileID: 0}
+  Death: {fileID: 0}
+  SlashVocals: []
 --- !u!82 &1446911540769833239
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10334,7 +10341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6076352262723960687}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.46, z: 0}
+  m_LocalPosition: {x: 0, y: 2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4662265759016173042}

@@ -14,6 +14,7 @@ public class LockedGateTrigger : MonoBehaviour
 
     private void Awake()
     {
+        GetComponentInParent<ParticleSystem>().Stop();
         InitialPosition = transform.position;
     }
 
@@ -24,13 +25,23 @@ public class LockedGateTrigger : MonoBehaviour
     {
         if (!Locked)
         {
-            if (Vector3.Distance(transform.position, InitialPosition) < SinkDistance )
+            if (Vector3.Distance(transform.position, InitialPosition) < SinkDistance)
             {
                 transform.position += Vector3.down * MovementSpeed;
-                Vector3 Offset = new Vector3( InitialPosition.x + Random.Range( -ShakeAmount, ShakeAmount), transform.position.y, InitialPosition.z + Random.Range( -ShakeAmount, ShakeAmount));
+                Vector3 Offset = new Vector3(InitialPosition.x + Random.Range(-ShakeAmount, ShakeAmount), transform.position.y, InitialPosition.z + Random.Range(-ShakeAmount, ShakeAmount));
                 transform.position = Vector3.Lerp(transform.position, Offset, .1f);
+                
+            }
+            else
+            {
+                GetComponentInParent<ParticleSystem>().Stop();
             }
         }
+        else 
+        {
+            
+        }
+
     }
 
     private void OnDrawGizmosSelected()
@@ -49,6 +60,7 @@ public class LockedGateTrigger : MonoBehaviour
             {
                 GlobalData.KeyCount--;
                 Locked = false;
+                GetComponentInParent<ParticleSystem>().Play();
             }
         }
     }

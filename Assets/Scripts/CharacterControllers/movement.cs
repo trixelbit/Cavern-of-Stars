@@ -324,7 +324,7 @@ public class movement : MonoBehaviour
             Invoke("ResetStun", .3f);
             rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
             GlobalData.Health--;
-            Debug.Log(GlobalData.Health);
+            
         }
     }
 

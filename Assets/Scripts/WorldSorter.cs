@@ -85,5 +85,8 @@ public class WorldSorter : MonoBehaviour
         Debug.Log(buffer);
     }
 
-
+    public void StartNewCampaign()
+    {
+        SceneManager.LoadScene(GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+    }
 }

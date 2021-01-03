@@ -480,7 +480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4662265760242700227
 Transform:
   m_ObjectHideFlags: 0
@@ -615,10 +615,26 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 7fe14dddb94cb5d4e9ab1ccdf88b51b1, type: 3}
     - {fileID: 2800000, guid: 2d18f2fc4b83dd24f9eaceb743b7e8df, type: 3}
   dash:
-    FrameCount: 0
-    ImageSpeed: 0
-    SpriteSheets: []
-    SpriteNormals: []
+    FrameCount: 1
+    ImageSpeed: 1
+    SpriteSheets:
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    SpriteNormals:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   slash:
     FrameCount: 7
     ImageSpeed: 25
@@ -631,7 +647,15 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 03cfba358fd61114280890e4304f65dd, type: 3}
     - {fileID: 2800000, guid: 03cfba358fd61114280890e4304f65dd, type: 3}
     - {fileID: 2800000, guid: 03cfba358fd61114280890e4304f65dd, type: 3}
-    SpriteNormals: []
+    SpriteNormals:
+    - {fileID: 2800000, guid: 40ad81f5b4101414f81c9bc111ad49b5, type: 3}
+    - {fileID: 2800000, guid: 40ad81f5b4101414f81c9bc111ad49b5, type: 3}
+    - {fileID: 2800000, guid: 40ad81f5b4101414f81c9bc111ad49b5, type: 3}
+    - {fileID: 2800000, guid: 40ad81f5b4101414f81c9bc111ad49b5, type: 3}
+    - {fileID: 2800000, guid: 40ad81f5b4101414f81c9bc111ad49b5, type: 3}
+    - {fileID: 2800000, guid: 61b8a05563cae6744bd31e7f22179fb0, type: 3}
+    - {fileID: 2800000, guid: 61b8a05563cae6744bd31e7f22179fb0, type: 3}
+    - {fileID: 2800000, guid: 61b8a05563cae6744bd31e7f22179fb0, type: 3}
 --- !u!1 &6076352261315949945
 GameObject:
   m_ObjectHideFlags: 0

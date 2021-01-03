@@ -7,34 +7,35 @@ public class BulletSpawner : MonoBehaviour
 {
     #region Dependencies
     [Header("Dependencies")]
-    public GameObject bullet; //references the bullet object
-    public Bullet bulletScript;
+    public GameObject bullet;
     #endregion
 
-    #region Variables
-    [Header("Bullet Variables")]
-    public Vector3 bulletDir;
-
-    [Header("Gizmos and Raycast Variables")]
-    public Color setColor;
-    [Range(0,3)] public float gizmoSize;
-    #endregion
-
-    #region Start, Update
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) { //when the spacebar is pushed
-            bulletScript.instantiateBullet();
+            AttackHell();
         }
+    }
 
-        Debug.DrawRay(transform.position, bulletDir, setColor);
+    #region Attacks
+    public void instantiateBullet()
+    {
+        //Instantiates the bullet at the init location with no rotation
+        Instantiate(bullet.gameObject, transform.position, Quaternion.Euler(0, 0, 0));
+    }
+    
+    public void AttackHell()
+    {
+        for (int i = 0; i <= 360; i++)
+        {
+            var temp = Instantiate(bullet);
+            temp.GetComponent<Bullet>().UpdateVelocity(new Vector3(0, i, 0), 0.5f);
+        }
     }
     #endregion
 }

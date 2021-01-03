@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\SceneFade.cs" />
     <Compile Include="Assets\Scripts\RoomExit.cs" />
-    <Compile Include="Assets\Developers\Huen\BulletSpawner.cs" />
+    <Compile Include="Assets\Developers\Huen\MyEnemies\BulletSpawner.cs" />
     <Compile Include="Assets\Scripts\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\UICanvas.cs" />
     <Compile Include="Assets\Scripts\CoreClasses\BaseEnemyClass.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Assets\Scripts\oscillatingSaw.cs" />
     <Compile Include="Assets\Scripts\LightFlicker.cs" />
     <Compile Include="Assets\StayOn.cs" />
-    <Compile Include="Assets\BillboardToCamera.cs" />
+    <Compile Include="Assets\Developers\Huen\BillboardToCamera.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Art\Old Test Files\terrain\NewSurfaceShader.shader" />

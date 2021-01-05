@@ -61,11 +61,13 @@ public class RoomExit : MonoBehaviour
                 //If room exists -> Load Scene By Name
                 if (GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName != "_")
                 {
+                    GlobalData.EnemyCount = 0;
                     SceneManager.LoadScene(GlobalData.Forest[(int)GlobalData.CurrentRoomCoord.x, (int)GlobalData.CurrentRoomCoord.y].SceneName);
+                    
                 }
                 else // If room doesn't exist -> fade back in
                 {
-                    GlobalData.BlackScreen.GetComponent<SceneFade>().Visible = true;
+                    GlobalData.BlackScreen.GetComponent<SceneFade>().Visible = false;
                 }
                 break;
 

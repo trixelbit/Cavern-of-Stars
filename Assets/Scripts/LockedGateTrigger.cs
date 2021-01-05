@@ -9,6 +9,11 @@ public class LockedGateTrigger : MonoBehaviour
     public float ShakeAmount = .1f;
     public float SinkDistance = 10;
 
+    [Header("Light Color")]
+    public Color UnlockedColor;
+    public Color LockedColor;
+    public GameObject GateLight;
+
     private Vector3 InitialPosition;
 
 
@@ -25,6 +30,8 @@ public class LockedGateTrigger : MonoBehaviour
     {
         if (!Locked)
         {
+            GateLight.GetComponent<Light>().color = UnlockedColor;
+
             if (Vector3.Distance(transform.position, InitialPosition) < SinkDistance)
             {
                 transform.position += Vector3.down * MovementSpeed;
@@ -39,7 +46,7 @@ public class LockedGateTrigger : MonoBehaviour
         }
         else 
         {
-            
+            GateLight.GetComponent<Light>().color = LockedColor;
         }
 
     }

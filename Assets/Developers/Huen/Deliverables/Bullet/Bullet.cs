@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// Title: Bullet Iteration 1
+    /// Type: Bullet
+    /// Description: A bullet prefab that can take in direction and speed from an outside
+    /// variable and utilize it to shoot it in a direction specified.
+    /// Comments: thank you, Marco.
+    /// </summary>
+    /// 
+
     #region Public Variables
+
     [Header("Bullet Variables")]
     [Range(0,1000)] public float Speed = 5f;
     [Range(0,5)] public float LifeSpan = 1f;
     public Vector3 Rotation;
+
     #endregion
 
     #region Orient the bullet and move it.
@@ -22,13 +33,13 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         // move with given velocity
-        transform.Translate(Vector3.forward * Speed);
+        transform.Translate(Rotation * Speed);
         Destroy(gameObject, LifeSpan);
     }
     #endregion
 
     #region Additional Flexibility
-    public void UpdateVelocity(Vector3 rotation, float speed)
+    public void UpdateVelocity(float speed, Vector3 rotation)
     {
         // update the values for speed and rotation
         transform.rotation = Quaternion.Euler(rotation);

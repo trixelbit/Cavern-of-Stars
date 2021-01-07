@@ -30,8 +30,8 @@ public class BulletSpawner : MonoBehaviour
     public void InstantiateBullet()
     {
         //Instantiates the bullet at the init location with no rotation
-        var bul = Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z));
-        bul.GetComponent<Bullet>().UpdateVelocity(new Vector3(transform.position.x, transform.position.y, transform.position.z), default);
+        var bul = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 0));
+        bul.GetComponent<Bullet>().UpdateVelocity(0.5f, transform.forward);
     }
     
     public void AttackHell()
@@ -39,8 +39,14 @@ public class BulletSpawner : MonoBehaviour
         for (int i = 0; i <= 360; i += 20)
         {
             var temp = Instantiate(bullet, transform.position, Quaternion.Euler(0,0,0));
-            temp.GetComponent<Bullet>().UpdateVelocity(new Vector3(0, i, 0), 0.5f);
+            temp.GetComponent<Bullet>().UpdateVelocity(0.5f, new Vector3(0, i, 0));
         }
+    }
+    #endregion
+
+    #region Rotate
+    void rotate()
+    { 
     }
     #endregion
 }

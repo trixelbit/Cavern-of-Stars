@@ -39,6 +39,7 @@ public class Bullet : MonoBehaviour
     #endregion
 
     #region Additional Flexibility
+
     public void UpdateVelocity(float speed, Vector3 rotation)
     {
         // update the values for speed and rotation

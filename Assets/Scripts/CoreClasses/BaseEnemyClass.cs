@@ -16,10 +16,12 @@ public class BaseEnemyClass : MonoBehaviour
 
     private bool Invulnerable = false;
     private Renderer rend;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rend = SpritePlane.GetComponent<Renderer>();
+        GlobalData.EnemyCount++; // Add Enemy to Global Enemy Count
     }
 
 
@@ -63,6 +65,7 @@ public class BaseEnemyClass : MonoBehaviour
 
     public virtual void Death()
     {
+        GlobalData.EnemyCount--;
         Destroy(gameObject);
     }
 

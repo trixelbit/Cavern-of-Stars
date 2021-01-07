@@ -22,7 +22,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                     ""name"": ""Vertical"",
                     ""type"": ""PassThrough"",
                     ""id"": ""87c6096f-b223-499f-a20c-b006723cba79"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -97,7 +97,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""positive"",
                     ""id"": ""61376838-00cf-4b2b-99be-054498777056"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
@@ -108,7 +108,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""negative"",
                     ""id"": ""25e04fd9-86ed-4373-b779-7b36a9d0778e"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
@@ -176,7 +176,7 @@ public class @PlayerContolBridge : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""5be2fda1-a8a8-4339-b30b-211da9e95c76"",
-                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

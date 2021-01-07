@@ -18,7 +18,6 @@ public enum World
     Castle=3
 };
 
-
 public static class GlobalData
 {
     #region Player Information
@@ -40,7 +39,9 @@ public static class GlobalData
 
     #region World State
     public static GameObject Camera;
+    public static GameObject GlobalMusicManager;
     public static bool Lock = false;
+    public static int EnemyCount = 0;
     #endregion
 
     #region Room Traversal
@@ -76,7 +77,14 @@ public static class GlobalData
     #region UI References
     public static GameObject Canvas;
     public static GameObject BlackScreen;
-    
+
+    #endregion
+
+    #region Settings
+    // volume is clamped from 0 to 1
+    public static float MasterVolume = 1f;
+    public static float MusicVolume = 1f;
+    public static float SoundVolume = .5f;
     #endregion
 
 }

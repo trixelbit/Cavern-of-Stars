@@ -31,8 +31,6 @@ public class Sprite
     public float SpriteWidth;
     public float SpriteHeight;
 
-
-
     #region Constructors
     public Sprite(Renderer renderer, Texture spriteSheet, Transform transform, float frameCount, float imageSpeed, float imageIndex)
     {

@@ -36,17 +36,11 @@ public class BulletSpawner : MonoBehaviour
     
     public void AttackHell()
     {
-        for (int i = 0; i <= 360; i += 20)
+        for (int i = 1; i <= 360; i += 20)
         {
             var temp = Instantiate(bullet, transform.position, Quaternion.Euler(0,0,0));
-            temp.GetComponent<Bullet>().UpdateVelocity(0.5f, new Vector3(0, i, 0));
+            temp.GetComponent<Bullet>().UpdateVelocity(0.5f, new Vector3(0, i, 0)); 
         }
-    }
-    #endregion
-
-    #region Rotate
-    void rotate()
-    { 
     }
     #endregion
 }

@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         // move with given velocity
-        transform.Translate(Rotation * Speed);
+        transform.Translate(Speed * Vector3.forward, Space.Self);
         Destroy(gameObject, LifeSpan);
     }
     #endregion

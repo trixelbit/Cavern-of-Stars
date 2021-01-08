@@ -22,7 +22,9 @@ public class VFXClass : MonoBehaviour
     [HideInInspector]
     public Renderer rend;
 
+
     private Vector3 RotationOffset;
+    private Vector3 VelocityBuffer;
 
     // Start is called before the first frame update
     void Start()
@@ -40,22 +42,27 @@ public class VFXClass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GlobalData.Locked)
+        {
+            
+
+            if (SpritePlane != null)
+            {
+                if (Sprite.Completed && DeleteOnComplete)
+                {
+                    //Sprite.ParentTransform = null;
+                    Destroy(SpritePlane);
+                    Destroy(this.gameObject);
+                }
+
+                Sprite.Render();
+            }
+        }
+
         if (Billboard)
         {
             transform.LookAt(Camera.main.transform);
             transform.rotation *= Quaternion.Euler(180 + RotationOffset.x, 0 + RotationOffset.y, 90 + RotationOffset.z);
-        }
-        
-        if (SpritePlane != null)
-        {
-            if (Sprite.Completed && DeleteOnComplete)
-            {
-                //Sprite.ParentTransform = null;
-                Destroy(SpritePlane);
-                Destroy(this.gameObject);
-            }
-
-            Sprite.Render();
         }
     }
 }

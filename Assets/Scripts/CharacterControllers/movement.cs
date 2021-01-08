@@ -30,6 +30,7 @@ public class movement : MonoBehaviour
     public Rigidbody rb;
     public GameObject SpritePlane;
 
+    [Header("Player Properties")]
     public float RunSpeed;
     public float DashSpeed = 3;
     public float FrictionPercent = .01f;
@@ -38,6 +39,7 @@ public class movement : MonoBehaviour
     public State CharacterState = State.idle;
     public bool Invincible = false;
 
+    [Header("Object References")]
     public GameObject Slash1;
     public GameObject HurtVFX;
     public GameObject DashParticleSystem;
@@ -48,6 +50,9 @@ public class movement : MonoBehaviour
     private PlayerContolBridge PlayerActionControl;
     private bool stun = false;
     private Vector4 OriginalColor;
+    private Vector3 VelocityBuffer;
+    private bool IsPaused = false;
+
 
     #region Unity Behaviors
     private void Awake()
@@ -73,45 +78,60 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        Vector3 velocity = rb.velocity;
-        float VerticalInput = PlayerActionControl.InGame.Vertical.ReadValue<float>();
-        float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
-        bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
-
-        Color LerpedColor = Vector4.Lerp(SpritePlane.GetComponent<Renderer>().material.color, OriginalColor, .1f);
-        SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", LerpedColor);
-        SpritePlane.GetComponent<Renderer>().material.color = LerpedColor;
-
-        // state checks
-        if (!stun)
+        // If game state is paused
+        if (!GlobalData.Locked)
         {
-            // kinetic motion
-            if (State.slash != CharacterState && State.dash != CharacterState)
+            if (IsPaused)
             {
-                // directino input-
-                if (HorizontalInput != 0 && VerticalInput != 0)
-                {
-                    rb.velocity = new Vector3(HorizontalInput * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, VerticalInput * RunSpeed * (float)Math.Sqrt(.5));
+                ExitPause();
+            }
 
-                    CharacterState = State.running;
-                }
-                else if (HorizontalInput != 0 || VerticalInput != 0)
-                {
-                    rb.velocity = new Vector3(HorizontalInput * RunSpeed, rb.velocity.y, VerticalInput * RunSpeed);
-                    CharacterState = State.running;
-                }
-                else
-                {
-                    rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
-                    CharacterState = State.idle;
-                }
+            Vector3 velocity = rb.velocity;
+            float VerticalInput = PlayerActionControl.InGame.Vertical.ReadValue<float>();
+            float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
+            bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
 
-                // set animation variables
-                SetPlayerDirection(HorizontalInput, VerticalInput);
+            Color LerpedColor = Vector4.Lerp(SpritePlane.GetComponent<Renderer>().material.color, OriginalColor, .1f);
+            SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", LerpedColor);
+            SpritePlane.GetComponent<Renderer>().material.color = LerpedColor;
+
+            // state checks
+            if (!stun)
+            {
+                // kinetic motion
+                if (State.slash != CharacterState && State.dash != CharacterState)
+                {
+                    // directino input-
+                    if (HorizontalInput != 0 && VerticalInput != 0)
+                    {
+                        rb.velocity = new Vector3(HorizontalInput * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, VerticalInput * RunSpeed * (float)Math.Sqrt(.5));
+
+                        CharacterState = State.running;
+                    }
+                    else if (HorizontalInput != 0 || VerticalInput != 0)
+                    {
+                        rb.velocity = new Vector3(HorizontalInput * RunSpeed, rb.velocity.y, VerticalInput * RunSpeed);
+                        CharacterState = State.running;
+                    }
+                    else
+                    {
+                        rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
+                        CharacterState = State.idle;
+                    }
+
+                    // set animation variables
+                    SetPlayerDirection(HorizontalInput, VerticalInput);
+                }
             }
         }
-        
+        else 
+        {
+            if (!IsPaused)
+            {
+                EnterPause();
+            }
+         
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -137,20 +157,27 @@ public class movement : MonoBehaviour
     #region Player Actions
     private void LightSlash()
     {
-        if ( CharacterState != State.slash && CharacterState != State.dash || GlobalData.ComboCount > 0)
+        if (!GlobalData.Locked)
         {
-            CharacterState = State.slash;
-            rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
-            GameObject Attack = Instantiate(Slash1);
-            Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
-            Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
+            if (CharacterState != State.slash || GlobalData.ComboCount > 0)
+            {
+                if (CharacterState != State.dash)
+                {
+                    EndDash();
+                }
+                CharacterState = State.slash;
+                rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
+                GameObject Attack = Instantiate(Slash1);
+                Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
+                Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
+            }
         }
     }
 
     private void StartDash()
     {
         Invincible = true;
-        if (CharacterState != State.slash && CharacterState != State.dash && GlobalData.DashUnlocked)
+        if (CharacterState != State.slash && CharacterState != State.dash && GlobalData.DashUnlocked && !GlobalData.Locked)
         {
             
             CharacterState = State.dash;
@@ -326,6 +353,20 @@ public class movement : MonoBehaviour
             GlobalData.Health--;
             
         }
+    }
+
+    private void EnterPause()
+    {
+        VelocityBuffer = rb.velocity;
+        rb.isKinematic = true;
+        IsPaused = true;
+    }
+
+    private void ExitPause()
+    {
+        rb.velocity = VelocityBuffer;
+        rb.isKinematic = false;
+        IsPaused = false;
     }
 
     #endregion

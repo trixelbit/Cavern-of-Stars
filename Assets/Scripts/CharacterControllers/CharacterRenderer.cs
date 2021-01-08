@@ -37,41 +37,45 @@ public class CharacterRenderer : MonoBehaviour
         CharacterState = Parent.transform.GetComponent<movement>().CharacterState;
         Direction = Parent.transform.GetComponent<movement>().Direction;
 
-
-        switch (CharacterState)
+        // Check if Game State is Paused
+        if (!GlobalData.Locked)
         {
-            case State.idle:
-                Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], idle.FrameCount, idle.ImageSpeed, true, true);
-                break;
 
-            case State.running:
-                Sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.SpriteNormals[(int)Direction], run.FrameCount, run.ImageSpeed, true, true);
-                break;
-
-            case State.slash:
-                if (Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] && Sprite.Completed)
-                {
-                    // return back to idle
-                    Parent.transform.GetComponent<movement>().CharacterState = State.idle;
+            switch (CharacterState)
+            {
+                case State.idle:
                     Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], idle.FrameCount, idle.ImageSpeed, true, true);
-                }
-                else
-                {   
-                    Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], slash.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
-                }
-                break;
+                    break;
 
-            case State.dash:
-                Sprite.UpdateSprite(dash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], dash.FrameCount, dash.ImageSpeed, true, true);
-                break;
-        }
+                case State.running:
+                    Sprite.UpdateSprite(run.SpriteSheets[(int)Direction], run.SpriteNormals[(int)Direction], run.FrameCount, run.ImageSpeed, true, true);
+                    break;
 
-        Sprite.Render();
+                case State.slash:
+                    if (Sprite.SpriteSheet == slash.SpriteSheets[(int)Direction] && Sprite.Completed)
+                    {
+                        // return back to idle
+                        Parent.transform.GetComponent<movement>().CharacterState = State.idle;
+                        Sprite.UpdateSprite(idle.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], idle.FrameCount, idle.ImageSpeed, true, true);
+                    }
+                    else
+                    {
+                        Sprite.UpdateSprite(slash.SpriteSheets[(int)Direction], slash.SpriteNormals[(int)Direction], slash.FrameCount, slash.ImageSpeed, false, false);
+                    }
+                    break;
 
-        if (Billboard)
-        {
-            transform.LookAt(Camera.main.transform);
-            transform.rotation *= Quaternion.Euler(90, 0, 0);
+                case State.dash:
+                    Sprite.UpdateSprite(dash.SpriteSheets[(int)Direction], idle.SpriteNormals[(int)Direction], dash.FrameCount, dash.ImageSpeed, true, true);
+                    break;
+            }
+
+            Sprite.Render();
+
+            if (Billboard)
+            {
+                transform.LookAt(Camera.main.transform);
+                transform.rotation *= Quaternion.Euler(90, 0, 0);
+            }
         }
     }
 

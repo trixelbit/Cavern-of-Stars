@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseEnemyClass : MonoBehaviour
-{ 
+{
     public int HP = 6;
     public int KnockBackValue = 1;
 
@@ -46,6 +46,11 @@ public class BaseEnemyClass : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, GlobalData.Player.transform.position, -2);
         HP -= damageDelt;
         Invoke("ResetCoolDownInvulnerability", .2f);
+        LockGame();
+        CheckHP();
+        
+
+        
     }
 
     public void ResetCoolDownInvulnerability()
@@ -53,18 +58,21 @@ public class BaseEnemyClass : MonoBehaviour
         Invulnerable = false;
 
     }
-    
+
     public void CheckHP()
-    {   
+    {
 
         if (HP <= 0)
         {
+            //LockGame();
+            
             Death();
         }
     }
 
     public virtual void Death()
     {
+        UnlockGame();
         GlobalData.EnemyCount--;
         Destroy(gameObject);
     }
@@ -72,7 +80,7 @@ public class BaseEnemyClass : MonoBehaviour
     public void ResetComboCount()
     {
         GlobalData.ComboCount = 0;
-        GlobalData.ComboTimeStamp = 0;   
+        GlobalData.ComboTimeStamp = 0;
     }
 
     public void AddToComboCount()
@@ -83,6 +91,17 @@ public class BaseEnemyClass : MonoBehaviour
             GlobalData.ComboTimeStamp = Time.time;
             Invoke("ResetComboCount", 0.01f);
         }
+    }
+
+    private void UnlockGame()
+    {
+        GlobalData.Locked = false;
+    }
+
+    private void LockGame()
+    {
+        GlobalData.Locked = true;
+        Invoke("UnlockGame", .3f);
     }
 
 }

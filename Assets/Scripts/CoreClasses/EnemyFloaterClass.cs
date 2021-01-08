@@ -15,15 +15,19 @@ public class EnemyFloaterClass : BaseEnemyClass
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, GlobalData.Player.transform.position) < 30)
+        if (!GlobalData.Locked)
         {
-            FloaterMovement();
-            Faceplayer();
+
+            if (Vector3.Distance(transform.position, GlobalData.Player.transform.position) < 30)
+            {
+                FloaterMovement();
+                Faceplayer();
+            }
+
+            //CheckHP();
+            OscilateSpritePlane();
+            LerpBackToPosition();
         }
-        
-        CheckHP();
-        OscilateSpritePlane();
-        LerpBackToPosition();
     }
 
 

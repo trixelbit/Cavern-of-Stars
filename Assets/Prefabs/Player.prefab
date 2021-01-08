@@ -423,14 +423,14 @@ MonoBehaviour:
     FrameCount: 1
     ImageSpeed: 1
     SpriteSheets:
+    - {fileID: 2800000, guid: a7cf84a0a89eadd4da436cd4c22a7e80, type: 3}
     - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: 7a9efefe33ed0ab44b114765ee896e84, type: 3}
     - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
     - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    - {fileID: 2800000, guid: 0038fd332d535de49a23fece62ff8039, type: 3}
+    - {fileID: 2800000, guid: 11c90d8ef80103341847ef5243096425, type: 3}
+    - {fileID: 2800000, guid: ac57b3eea2e05334d889b20a8375c150, type: 3}
     SpriteNormals:
     - {fileID: 0}
     - {fileID: 0}
@@ -618,14 +618,14 @@ MonoBehaviour:
     FrameCount: 1
     ImageSpeed: 1
     SpriteSheets:
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    - {fileID: 2800000, guid: a7cf84a0a89eadd4da436cd4c22a7e80, type: 3}
     - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
     - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
     - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
     - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}
+    - {fileID: 2800000, guid: 0038fd332d535de49a23fece62ff8039, type: 3}
+    - {fileID: 2800000, guid: 11c90d8ef80103341847ef5243096425, type: 3}
+    - {fileID: 2800000, guid: ac57b3eea2e05334d889b20a8375c150, type: 3}
     SpriteNormals:
     - {fileID: 0}
     - {fileID: 0}

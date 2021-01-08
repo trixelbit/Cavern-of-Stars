@@ -40,7 +40,7 @@ public static class GlobalData
     #region World State
     public static GameObject Camera;
     public static GameObject GlobalMusicManager;
-    public static bool Lock = false;
+    public static bool Locked = false;
     public static int EnemyCount = 0;
     #endregion
 
@@ -60,7 +60,7 @@ public static class GlobalData
      *      |           |
      *      |           |
      *      |___________|
-     * [0,24]  [12,24]  [23,23]
+     * [0,23]  [12,23]  [23,23]
      *            ^
      *      Starting Room
      *    

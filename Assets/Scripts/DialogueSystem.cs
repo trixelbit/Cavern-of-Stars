@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.IO;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -10,34 +12,40 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.Sprite Nin;
     public UnityEngine.Sprite Deya;
 
-    private Conversation Convo;
+    private Dialogue Convo;
     private int ConvoIndex;
     private string DialogueText;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        BeginDialogue(ConversationFile);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NextDialogue();
+        }
 
     }
 
     public void BeginDialogue(TextAsset JsonFile)
     {
         // Load Conversation from JSON File
-        Convo = JsonUtility.FromJson<Conversation>(JsonFile.text);
         ConvoIndex = 0;
+        Convo = JsonUtility.FromJson<Dialogue>(JsonFile.text);
         GlobalData.Locked = true;
-        DialogueText = Convo.conversation[ConvoIndex].Text;
+        DialogueText = Convo.Conversation[ConvoIndex].Text;
+        Debug.Log(DialogueText);
+        GlobalData.Canvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DialogueText;
     }
 
     public void NextDialogue()
     {
-        if (ConvoIndex + 1 > Convo.conversation.Length)
+        if (ConvoIndex + 1 > Convo.Conversation.Length)
         {
             // end conversation
             GlobalData.Locked = false;
@@ -46,19 +54,20 @@ public class DialogueSystem : MonoBehaviour
         {
             // load next dialogue
             ConvoIndex++;
-            DialogueText = Convo.conversation[ConvoIndex].Text;
+            DialogueText = Convo.Conversation[ConvoIndex].Text;
+            GlobalData.Canvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DialogueText;
         }
     }
 }
 
 [System.Serializable]
-public class Conversation
+public class Dialogue
 {
-    public Dialogue[] conversation;
+    public Quote[] Conversation;
 }
 
 [System.Serializable]
-public class Dialogue
+public class Quote
 {
     public string SpeakerName;
     public string Text;

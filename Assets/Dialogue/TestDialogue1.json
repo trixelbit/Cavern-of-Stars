@@ -3,12 +3,14 @@
     [
         {
             "SpeakerName" : "Nin",
-            "Text" : "blablablabla|"
+            "Text" : "blablablabla|",
+            "Speed" : "2"
         },
 
         {
             "SpeakerName" : "Nin",
-            "Text" : "blablablabla|"
+            "Text" : "hahahaha|",
+            "Speed" : "2"
         }
     ]
 }

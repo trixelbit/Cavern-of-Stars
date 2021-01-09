@@ -1,0 +1,14 @@
+{
+    "Conversation":
+    [
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "blablablabla|"
+        },
+
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "blablablabla|"
+        }
+    ]
+}

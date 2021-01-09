@@ -163,9 +163,9 @@ MonoBehaviour:
   Walk: {fileID: 8300000, guid: 88ae577cad77f024680fbca060b4ebad, type: 3}
   Dash: {fileID: 0}
   Slash:
-  - {fileID: 8300000, guid: 3e03a50650b58a94b9f40f75f8a74f11, type: 3}
-  - {fileID: 8300000, guid: 32980530edbc2d944a24856895eb92f9, type: 3}
-  - {fileID: 8300000, guid: e6c2a9aa02bf5664b9dbbea9f218bbb9, type: 3}
+  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
+  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
+  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
   Hurt: {fileID: 0}
   Death: {fileID: 0}
   SlashVocals: []
@@ -424,7 +424,7 @@ MonoBehaviour:
     ImageSpeed: 1
     SpriteSheets:
     - {fileID: 2800000, guid: a7cf84a0a89eadd4da436cd4c22a7e80, type: 3}
-    - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
+    - {fileID: 2800000, guid: 3bfa58d1e5fda44478cc04291d05ea72, type: 3}
     - {fileID: 2800000, guid: 7a9efefe33ed0ab44b114765ee896e84, type: 3}
     - {fileID: 2800000, guid: c38ca74d4fe9e3440ab532bde234a793, type: 3}
     - {fileID: 2800000, guid: 4597df597d2a0514abd3b4b04cb13667, type: 3}

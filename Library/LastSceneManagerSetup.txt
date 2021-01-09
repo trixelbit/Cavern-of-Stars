@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/The Forest/A12,23 StarLandingSpot.unity
+- path: Assets/Scenes/The Forest/A12,21-FirstGate.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

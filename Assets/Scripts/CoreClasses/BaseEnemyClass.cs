@@ -46,7 +46,7 @@ public class BaseEnemyClass : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, GlobalData.Player.transform.position, -2);
         HP -= damageDelt;
         Invoke("ResetCoolDownInvulnerability", .2f);
-        LockGame();
+        
         CheckHP();
         
 
@@ -56,7 +56,6 @@ public class BaseEnemyClass : MonoBehaviour
     public void ResetCoolDownInvulnerability()
     {
         Invulnerable = false;
-
     }
 
     public void CheckHP()
@@ -65,8 +64,12 @@ public class BaseEnemyClass : MonoBehaviour
         if (HP <= 0)
         {
             //LockGame();
-            
+
             Death();
+        }
+        else
+        {
+            LockGame();
         }
     }
 

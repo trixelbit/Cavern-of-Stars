@@ -27,7 +27,8 @@ public static class GlobalData
     public static float RunSpeed = 14;
 
     public static bool DashUnlocked = true;
-    public static float DashSpeed = 40;
+    public static float DashSpeed = 30;//40;
+    public static float DashDuration = .2f;//.2f;
 
     public static int ComboCount = 0;
     public static float ComboTimeStamp = 0;

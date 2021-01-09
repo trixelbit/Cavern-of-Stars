@@ -183,7 +183,7 @@ public class movement : MonoBehaviour
             CharacterState = State.dash;
             rb.useGravity = false;
             rb.velocity = Vector3FromDirectionMagnitude(Direction, GlobalData.DashSpeed);
-            Invoke("EndDash", .20f);
+            StartCoroutine("EndDash");//Invoke("EndDash", .20f);
             
             DashParticleSystem.GetComponent<ParticleSystem>().Play();
             VFXAfterImage.GetComponent<ParticleSystem>().Play();
@@ -195,8 +195,10 @@ public class movement : MonoBehaviour
         }
     }
 
-    private void EndDash()
+    IEnumerator EndDash()
     {
+        yield return new WaitForSeconds(GlobalData.DashDuration);
+
         rb.useGravity = true;
         Invincible = false;
         CharacterState = State.idle;

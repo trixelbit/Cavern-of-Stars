@@ -3,14 +3,38 @@
     [
         {
             "SpeakerName" : "Nin",
-            "Text" : "blablablabla|",
-            "Speed" : "2"
+            "Text" : "Once wawa upon uh ►|",
+            "CharDelay" : ".05"
         },
-
+        {
+            "SpeakerName" : "Deya",
+            "Text" : "You smell bad. ►|",
+            "CharDelay" : ".05"
+        },
         {
             "SpeakerName" : "Nin",
-            "Text" : "hahahaha|",
-            "Speed" : "2"
+            "Text" : "Fuck you ►|",
+            "CharDelay" : ".2"
+        },
+        {
+            "SpeakerName" : "Deya",
+            "Text" : "Thank you. ►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Deya",
+            "Text" : "Yo'ur an ilterate fUck, cunt. ►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "You slit is stinky, hoe ►|",
+            "CharDelay" : ".01"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "S T A N K E E ►|",
+            "CharDelay" : ".2"
         }
     ]
 }

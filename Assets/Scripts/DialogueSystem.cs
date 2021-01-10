@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -12,24 +13,40 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.Sprite Nin;
     public UnityEngine.Sprite Deya;
 
+    [Header("Sound Effects")]
+    public AudioClip[] TextTik;
+
+    // Current Dialogue
     private Dialogue Convo;
     private int ConvoIndex;
     private string DialogueText;
+    private string SpeakerName;
 
-    // Start is called before the first frame update
+    // Component References
+    private TextMeshProUGUI TextMesh;
+    private UnityEngine.UI.Image CharacterPortrait;
+    private TextMeshProUGUI SpeakerTextMesh;
+
+    void Awake()
+    {
+        GameObject child;
+        child = GlobalData.Canvas.transform.GetChild(3).gameObject;
+        TextMesh = child.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        CharacterPortrait = child.transform.GetChild(2).GetComponent<Image>();
+        SpeakerTextMesh = child.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+    }
+    
     void Start()
     {
         BeginDialogue(ConversationFile);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             NextDialogue();
         }
-
     }
 
     public void BeginDialogue(TextAsset JsonFile)
@@ -38,9 +55,10 @@ public class DialogueSystem : MonoBehaviour
         ConvoIndex = 0;
         Convo = JsonUtility.FromJson<Dialogue>(JsonFile.text);
         GlobalData.Locked = true;
+
+        UpdateCharacter(Convo.Conversation[ConvoIndex].SpeakerName);
         DialogueText = Convo.Conversation[ConvoIndex].Text;
-        Debug.Log(DialogueText);
-        GlobalData.Canvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DialogueText;
+        StartCoroutine("AddText");
     }
 
     public void NextDialogue()
@@ -52,13 +70,76 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            // load next dialogue
+            // load next dialogue 
             ConvoIndex++;
+            UpdateCharacter(Convo.Conversation[ConvoIndex].SpeakerName);
             DialogueText = Convo.Conversation[ConvoIndex].Text;
-            GlobalData.Canvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = DialogueText;
+            StartCoroutine("AddText");
         }
     }
+
+    // Animate Text Popping In to the Dialious Box
+    IEnumerator AddText()
+    {
+        string buffer = "";
+        int index = 0;
+
+        while ('|' != DialogueText[index])
+        {
+
+            if (DialogueText[index] != '.' && DialogueText[index] != ' ')
+            {
+                AudioSource Source = GlobalData.Canvas.GetComponent<AudioSource>();
+
+                Source.clip = TextTik[(int)Random.Range(0, TextTik.Length)];
+                Source.volume = GlobalData.SoundVolume * .5f;
+                Source.loop = false;
+                Source.Play();
+            }
+            
+
+            buffer += DialogueText[index];
+            TextMesh.text = buffer;
+            index++;
+
+            yield return new WaitForSeconds(Convo.Conversation[ConvoIndex].CharDelay);
+        }
+    }
+
+
+    public void UpdateCharacter(string speakerName)
+    {
+        SpeakerTextMesh.text = speakerName + ":";
+        switch (speakerName)
+        {
+            case "Nin":
+                CharacterPortrait.sprite = Nin;
+                CharacterPortrait.rectTransform.sizeDelta = new Vector2(Nin.texture.width, Nin.texture.height);
+                break;
+
+            case "Deya":
+                CharacterPortrait.sprite = Deya;
+                CharacterPortrait.rectTransform.sizeDelta = new Vector2(Deya.texture.width, Deya.texture.height);
+                break;
+        }
+
+    }
+
+    private bool ElementIsInArray(AudioClip e, AudioClip[] arr)
+    {
+        foreach (AudioClip element in arr)
+        {
+            if (element == e)
+            {
+                return true;
+            }
+        }
+        return false;
+
+
+    }
 }
+
 
 [System.Serializable]
 public class Dialogue
@@ -71,7 +152,10 @@ public class Quote
 {
     public string SpeakerName;
     public string Text;
+    public float CharDelay;
 }
+
+
 
 
 

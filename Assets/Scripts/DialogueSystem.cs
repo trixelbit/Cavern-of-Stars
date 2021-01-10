@@ -30,7 +30,7 @@ public class DialogueSystem : MonoBehaviour
     void Awake()
     {
         GameObject child;
-        child = GlobalData.Canvas.transform.GetChild(3).gameObject;
+        child = GlobalData.Canvas.transform.GetChild(2).gameObject;
         TextMesh = child.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         CharacterPortrait = child.transform.GetChild(2).GetComponent<Image>();
         SpeakerTextMesh = child.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
@@ -38,14 +38,24 @@ public class DialogueSystem : MonoBehaviour
     
     void Start()
     {
-        BeginDialogue(ConversationFile);
+        
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            NextDialogue();
+            if (!GlobalData.ChatBoxIsActive)
+            {
+                GlobalData.ChatBoxIsActive = true;
+                BeginDialogue(ConversationFile);
+            }
+            else
+            {
+                NextDialogue();
+            }
+            
+
         }
     }
 
@@ -63,10 +73,12 @@ public class DialogueSystem : MonoBehaviour
 
     public void NextDialogue()
     {
-        if (ConvoIndex + 1 > Convo.Conversation.Length)
+        if (ConvoIndex + 1 >= Convo.Conversation.Length)
         {
             // end conversation
+            GlobalData.ChatBoxIsActive = false;
             GlobalData.Locked = false;
+
         }
         else
         {

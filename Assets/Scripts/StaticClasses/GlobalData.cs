@@ -78,6 +78,7 @@ public static class GlobalData
     #region UI References
     public static GameObject Canvas;
     public static GameObject BlackScreen;
+    public static bool ChatBoxIsActive = false;
 
     #endregion
 

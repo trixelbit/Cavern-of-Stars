@@ -20,20 +20,21 @@ public class MinimapSystem : MonoBehaviour
     public GameObject single;
     public Level level;
     public bool playerPresent;
-    public Level[,] ReferenceArray;
 
     #region Grid System Ver 2 Variables
     public float x_Start, y_Start;
-    public int columnLength, rowLength;
+    public float columnLength, rowLength;
     public float x_Space, y_Space;
     public GameObject gridParent;
     public GameObject darkBG;
     public GameObject bgParent;
 
+    private bool mFaded = false;
+    public float Duration = 0.4f;
+
     #endregion
 
     #region Grid System Ver 1 Variables
-    public UnityEngine.Sprite sprite;
     public float[,] Grid;
     int Vertical, Horizontal, col, row;
     #endregion
@@ -43,26 +44,14 @@ public class MinimapSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var MapBG = Instantiate(darkBG, transform.position, Quaternion.identity);
-        MapBG.transform.parent = bgParent.transform;
-        MapBG.transform.localScale = bgParent.transform.localScale;
-
-        for (int i = 0; i < columnLength * rowLength; i++)
-        {
-            var singleClone = Instantiate(single, new Vector3(x_Start + x_Space * (i % columnLength), y_Start + y_Space * (i / columnLength)), Quaternion.identity);
-            singleClone.name = ("x: " + i + " y: " + i);
-            singleClone.transform.parent = gridParent.transform;
-            singleClone.layer = 5;
-        }
-        ReferenceArray = GlobalData.Forest;
         DrawGrid();
-        UpdateState();
+        ShowFullMap();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        ShowFullMap();
     }
     #endregion
 
@@ -70,41 +59,69 @@ public class MinimapSystem : MonoBehaviour
     //Draw the Grid for the Minimap
     void DrawGrid()
     {
-        for (int col = 0; col < 24; col++)
+        var MapBG = Instantiate(darkBG, transform.position, Quaternion.identity);
+        MapBG.transform.parent = bgParent.transform;
+        MapBG.transform.localScale = bgParent.transform.localScale;
+        
+        for (int i = 0; i <= columnLength; i++)
         {
-            for (int row = 0; row < 24; row++)
-            {
-                /*if (GlobalData.Forest[col, row].SceneName[0] != '_')
+            for (int j = 0; j <= rowLength; j++)
+            { 
+            var singleClone = Instantiate(single, new Vector3(x_Start + x_Space * i, y_Start + (-y_Space * j)), Quaternion.identity);
+
+            singleClone.name = ("x: " + i + " y: " + j);
+
+                if (GlobalData.Forest[i,j].SceneName[0] != '_')
                 {
-                    Debug.Log("Instantiating UI Element...");
-                    Instantiate(single, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
-                    Debug.Log("Instantiated UI Element!");
+                    singleClone.GetComponent<Image>().color = new Color(100, 100, 100);
+                    singleClone.name = ("OCCx: " + i + " OCCy: " + j);
                 }
 
-                else
+                if (GlobalData.CurrentRoomCoord == new Vector2(i, j))
                 {
-                    Debug.Log("Instantiating Empty");
-                }*/
+                    singleClone.GetComponent<Image>().color = new Color(0, 255, 255);
+                    singleClone.name = ("CURRENTx: " + i + " CURRENTy: " + j);
+                }
+                singleClone.transform.parent = gridParent.transform;
 
-
+            singleClone.layer = 5;
             }
         }
     }
-
-    //Actual Level Minimap
-        void UpdateState()
-        {
-
-        }
     #endregion
 
     #region Bring up the Full Minimap
+
     //Bring up Full Minimap
     void ShowFullMap()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
-        { 
-        
+        {
+            Fade();
+        }
+    }
+
+    public void Fade()
+    {
+        var canvGroup = GetComponent<CanvasGroup>();
+
+        // Toggle the end value depending on the faded state
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, mFaded ? 1 : 0));
+
+        // Toggle the faded state
+        mFaded = !mFaded;
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+
+            yield return null;
         }
     }
     #endregion
@@ -139,7 +156,7 @@ public class MinimapSystem : MonoBehaviour
     #endregion
 
     #region Grid System Ver 1
-    private void SpawnTile(int x, int y, float value)
+    /*private void SpawnTile(int x, int y, float value)
     {
         Vertical = (int)Camera.main.orthographicSize;
         Horizontal = (int)(Vertical * (float)(Screen.width / Screen.height));
@@ -157,8 +174,7 @@ public class MinimapSystem : MonoBehaviour
         GameObject g = new GameObject("x: " +x + "y: " + y);
         g.transform.position = new Vector3(x - (Horizontal - 0.5f), y - (Vertical - 0.5f));
         var s = g.AddComponent<SpriteRenderer>();
-        s.sprite = sprite;
         s.color = new Color(value, value, value);
-    }
+    }*/
     #endregion
 }

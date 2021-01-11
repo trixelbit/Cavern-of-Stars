@@ -22,16 +22,27 @@ public class MinimapSystem : MonoBehaviour
     public bool playerPresent;
 
     #region Grid System Ver 2 Variables
+    //Grid Draw Variables
     public float x_Start, y_Start;
     public float columnLength, rowLength;
     public float x_Space, y_Space;
     public GameObject gridParent;
-    public GameObject darkBG;
-    public GameObject bgParent;
+    //public GameObject darkBG;
+    //public GameObject bgParent;
 
-    private bool mFaded = false;
+    //Fading Variables
+    private bool mFaded = true;
     public float Duration = 0.4f;
 
+    //Sound Effects Variables
+    public List<AudioClip> SoundEffects;
+    static AudioSource audioSrc;
+
+    //Map manipulation variables
+    private float mouseY;
+    private float mouseX;
+    private float xRotation;
+    public float LookSpeed = 3f;
     #endregion
 
     #region Grid System Ver 1 Variables
@@ -44,25 +55,128 @@ public class MinimapSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSrc = this.GetComponent<AudioSource>();
         DrawGrid();
-        ShowFullMap();
     }
 
     // Update is called once per frame
     void Update()
     {
         ShowFullMap();
+        ManipulateGrid();
+        ChangeGridScale();
     }
+    #endregion
+
+    #region Manipulate the Grid while Active
+
+    void ManipulateGrid()
+    {
+        Vector3 moveDir;
+        if (Input.GetMouseButton(2))
+        {
+            mouseY = Input.GetAxis("Mouse Y");
+            mouseX = Input.GetAxis("Mouse X");
+        }
+
+        if (Input.GetMouseButtonUp(2))
+        {
+            mouseY = 0;
+            mouseX = 0;
+        }
+
+        moveDir = transform.right * mouseX + transform.up * mouseY;
+        gridParent.transform.Translate(moveDir * LookSpeed * Time.deltaTime);
+    }
+
+    float ChangeGridScale()
+    {
+        float ScaleFactor = 0.1f;
+        float LookScaleMultiplier = 1;
+        float temp = LookScaleMultiplier;
+        var CurrentScale = gridParent.transform.localScale;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            CurrentScale = new Vector3(CurrentScale.x + ScaleFactor, CurrentScale.y + ScaleFactor, CurrentScale.z + ScaleFactor);
+            temp += ScaleFactor;
+            LookScaleMultiplier = temp;
+            gridParent.transform.localScale = CurrentScale;
+            
+
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            CurrentScale = new Vector3(CurrentScale.x - ScaleFactor, CurrentScale.y - ScaleFactor, CurrentScale.z - ScaleFactor);
+            gridParent.transform.localScale = CurrentScale;
+        }
+
+        return LookScaleMultiplier;
+    }
+
+    void ResetGrid()
+    {
+        gridParent.transform.localScale = new Vector3(1,1,1);
+        gridParent.transform.localPosition = new Vector3(0,0,0);
+    }
+
+    #endregion
+
+    #region Bring up the Full Minimap and Fade
+
+    //Bring up Full Minimap
+    void ShowFullMap()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Fade();
+        }
+    }
+
+    public void Fade()
+    {
+        var canvGroup = GetComponent<CanvasGroup>();
+        // Toggle the end value depending on the faded state
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, mFaded ? 1 : 0));
+
+        // Toggle the faded state
+        mFaded = !mFaded;
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+
+        //Menu Sound Effect
+        PlaySoundEffect((int)end);
+
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+
+            if (canvGroup.alpha == 0)
+            {
+                ResetGrid();
+            }
+
+            yield return null;
+        }
+    }
+
+    public void PlaySoundEffect(int index)
+    {
+        int i = index;
+        audioSrc.PlayOneShot(SoundEffects[i]);
+    }
+    
     #endregion
 
     #region Draw Grid and Update the State of it
     //Draw the Grid for the Minimap
     void DrawGrid()
     {
-        var MapBG = Instantiate(darkBG, transform.position, Quaternion.identity);
-        MapBG.transform.parent = bgParent.transform;
-        MapBG.transform.localScale = bgParent.transform.localScale;
-        
         for (int i = 0; i <= columnLength; i++)
         {
             for (int j = 0; j <= rowLength; j++)
@@ -88,71 +202,6 @@ public class MinimapSystem : MonoBehaviour
             }
         }
     }
-    #endregion
-
-    #region Bring up the Full Minimap
-
-    //Bring up Full Minimap
-    void ShowFullMap()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Fade();
-        }
-    }
-
-    public void Fade()
-    {
-        var canvGroup = GetComponent<CanvasGroup>();
-
-        // Toggle the end value depending on the faded state
-        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, mFaded ? 1 : 0));
-
-        // Toggle the faded state
-        mFaded = !mFaded;
-    }
-
-    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
-    {
-        float counter = 0f;
-
-        while (counter < Duration)
-        {
-            counter += Time.deltaTime;
-            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
-
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region Console Visualization
-    //Minimap Visualization
-    /*private void printWorldBlock()
-        {
-            string buffer = "";
-            for (int i = 0; i < 24; i++)
-            {
-                buffer += "[";
-                for (int j = 0; j < 24; j++)
-                {
-                    if (GlobalData.Forest[j, i].SceneName[0] != '_')
-                    {
-                        buffer += "#";
-                    }
-                    else
-                    {
-                        buffer += GlobalData.Forest[j, i].SceneName[0];
-                    }
-
-
-                }
-                buffer += "]\n";
-
-            }
-
-            Debug.Log(buffer);
-        }*/
     #endregion
 
     #region Grid System Ver 1

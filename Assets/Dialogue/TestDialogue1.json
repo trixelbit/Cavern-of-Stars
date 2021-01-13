@@ -13,28 +13,18 @@
         },
         {
             "SpeakerName" : "Nin",
-            "Text" : "Fuck you ►|",
+            "Text" : "You suck toes? ►|",
             "CharDelay" : ".2"
         },
         {
             "SpeakerName" : "Deya",
-            "Text" : "Thank you. ►|",
+            "Text" : "Nah b, das gr0ss ►|",
             "CharDelay" : ".05"
         },
         {
             "SpeakerName" : "Deya",
-            "Text" : "Yo'ur an ilterate fUck, cunt. ►|",
+            "Text" : "^-^ ►|",
             "CharDelay" : ".05"
-        },
-        {
-            "SpeakerName" : "Nin",
-            "Text" : "You slit is stinky, hoe ►|",
-            "CharDelay" : ".01"
-        },
-        {
-            "SpeakerName" : "Nin",
-            "Text" : "S T A N K E E ►|",
-            "CharDelay" : ".2"
         }
     ]
 }

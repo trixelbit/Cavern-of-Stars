@@ -180,13 +180,17 @@ public class MinimapSystem : MonoBehaviour
         for (int i = 0; i <= columnLength; i++)
         {
             for (int j = 0; j <= rowLength; j++)
-            { 
-            var singleClone = Instantiate(single, new Vector3(x_Start + x_Space * i, y_Start + (-y_Space * j)), Quaternion.identity);
+            {
+                var singleClone = Instantiate(single, new Vector3(x_Start + x_Space * i, y_Start + (-y_Space * j)), Quaternion.identity);
 
-            singleClone.name = ("x: " + i + " y: " + j);
+                if (GlobalData.Forest[i, j].SceneName[0] == '_')
+                {
+                    Destroy(singleClone);
+                }
 
                 if (GlobalData.Forest[i,j].SceneName[0] != '_')
-                {
+                {   
+                    singleClone.name = ("x: " + i + " y: " + j);
                     singleClone.GetComponent<Image>().color = new Color(100, 100, 100);
                     singleClone.name = ("OCCx: " + i + " OCCy: " + j);
                 }

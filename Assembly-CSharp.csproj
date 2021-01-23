@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\SceneFade.cs" />
     <Compile Include="Assets\Scripts\RoomExit.cs" />
     <Compile Include="Assets\Developers\Huen\MyEnemies\BulletSpawner.cs" />
+    <Compile Include="Assets\Developers\Huen\Minimap System\Minimap.cs" />
     <Compile Include="Assets\Scripts\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\UICanvas.cs" />
     <Compile Include="Assets\Scripts\CoreClasses\BaseEnemyClass.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Assets\Scripts\LockedGateTrigger.cs" />
     <Compile Include="Assets\Scripts\CoreClasses\VFXClass.cs" />
     <Compile Include="Assets\Scripts\NamedArrayAttribute.cs" />
-    <Compile Include="Assets\Developers\Huen\MinimapSystem.cs" />
+    <Compile Include="Assets\Developers\Huen\Minimap System\MinimapSystem.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\GlobalMusicManager.cs" />
     <Compile Include="Assets\Scripts\CharacterControllers\movement.cs" />

@@ -44,7 +44,7 @@ public class PlayerAudio : MonoBehaviour
             case State.running:
 
                 Source.clip = Walk;
-                Source.volume = GlobalData.SoundVolume * .5f;
+                Source.volume = GlobalData.SoundVolume * .2f;
                 if (!Source.isPlaying)
                 {
                     Source.Play();
@@ -67,6 +67,22 @@ public class PlayerAudio : MonoBehaviour
                     Source.loop = false;
                     Source.Play();
                 }
+                break;
+
+
+            case State.dash:
+                if (!Source.isPlaying || Source.clip != Dash)
+                {
+                    Source.volume = GlobalData.SoundVolume * .2f; 
+                    Source.clip = Dash;
+                    Source.loop = false;
+                    if (!Source.isPlaying)
+                    {
+                        Source.Play();
+                    }
+                
+                }
+                
                 break;
 
             default:

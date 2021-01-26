@@ -161,11 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walk: {fileID: 8300000, guid: 88ae577cad77f024680fbca060b4ebad, type: 3}
-  Dash: {fileID: 0}
+  Dash: {fileID: 8300000, guid: fadda455c6dff5d47ad281f9a54adea7, type: 3}
   Slash:
-  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
-  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
-  - {fileID: 8300000, guid: a8128cd23a680484ea6f4e471270a33a, type: 3}
+  - {fileID: 8300000, guid: 3e03a50650b58a94b9f40f75f8a74f11, type: 3}
   Hurt: {fileID: 0}
   Death: {fileID: 0}
   SlashVocals: []

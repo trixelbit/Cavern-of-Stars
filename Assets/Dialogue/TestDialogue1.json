@@ -3,28 +3,34 @@
     [
         {
             "SpeakerName" : "Nin",
-            "Text" : "Sup biiiiiiiiiitch ►|",
+            "Text" : "A clown held a door open for me the other day. ►|",
             "CharDelay" : ".05"
         },
         {
             "SpeakerName" : "Deya",
-            "Text" : "Ey hoee. ►|",
+            "Text" : "Ok? ►|",
             "CharDelay" : ".05"
         },
         {
             "SpeakerName" : "Nin",
-            "Text" : "You suck toes? ►|",
+            "Text" : " I thought What a nice...►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "...JESTER. ►|",
             "CharDelay" : ".2"
         },
         {
             "SpeakerName" : "Deya",
-            "Text" : "Nah b, das gr0ss ►|",
+            "Text" : "I'm done with you. ►|",
             "CharDelay" : ".05"
         },
         {
-            "SpeakerName" : "Deya",
+            "SpeakerName" : "Nin",
             "Text" : "^-^ ►|",
             "CharDelay" : ".05"
         }
     ]
+    
 }

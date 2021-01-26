@@ -6989,16 +6989,16 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fdc1b14bc976b6940a1c55293f6f5774, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.829
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 495.79
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -7017,7 +7017,7 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.22602844
+      time: 0.13537598
       value: 0
       inSlope: 0.21592467
       outSlope: 0.21592467
@@ -18129,12 +18129,32 @@ PrefabInstance:
     - target: {fileID: 298844527483197101, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.66
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1057612062724520823, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_Intensity
-      value: 0.4
+      value: 10.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057612062724520823, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.77250254
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057612062724520823, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Range
+      value: 5.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057612062724520823, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057612062724520823, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1542904701821299681, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
@@ -18144,12 +18164,12 @@ PrefabInstance:
     - target: {fileID: 1542904701821299681, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.76157
+      value: 18.55
       objectReference: {fileID: 0}
     - target: {fileID: 1542904701821299681, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 269.90997
+      value: 272.58
       objectReference: {fileID: 0}
     - target: {fileID: 1542904701821299681, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
@@ -18191,6 +18211,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7312956025508078910, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7456399211741437387, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_Name
@@ -18199,7 +18224,27 @@ PrefabInstance:
     - target: {fileID: 8065491249864868275, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
         type: 3}
       propertyPath: m_Intensity
-      value: 2
+      value: 2.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065491249864868275, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.027450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065491249864868275, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065491249864868275, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065491249864868275, guid: 8b63ab088d9047d4391c7dc37ccaaaea,
+        type: 3}
+      propertyPath: m_Range
+      value: 40.51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b63ab088d9047d4391c7dc37ccaaaea, type: 3}

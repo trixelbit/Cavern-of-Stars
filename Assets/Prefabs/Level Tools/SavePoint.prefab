@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2361932693601854605}
   m_LocalRotation: {x: -0.41804165, y: -0.5155426, z: -0.4807511, w: -0.5730056}
-  m_LocalPosition: {x: -4.7499237, y: 4.880001, z: -9.97}
+  m_LocalPosition: {x: -4.77, y: 1.89, z: -9.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1542904701821299681}
@@ -42,9 +42,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.29396662, b: 0, a: 1}
+  m_Color: {r: 0.754717, g: 0.16532356, b: 0, a: 1}
   m_Intensity: 3.2
-  m_Range: 50
+  m_Range: 40
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -136,8 +136,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.9606118, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 17.47
+  m_Intensity: 5
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f09c1df3e9b6ee40a378f4281a38783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlickerRange: 0.2
-  UpdateFrequency: 0.2
+  FlickerRange: 0.1
+  UpdateFrequency: 0.1
 --- !u!95 &2559606025595837785
 Animator:
   serializedVersion: 3

@@ -1,0 +1,36 @@
+{
+    "Conversation":
+    [
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "A clown held a door open for me the other day. ►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Deya",
+            "Text" : "Ok? ►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : " I thought What a nice...►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "...JESTER. ►|",
+            "CharDelay" : ".2"
+        },
+        {
+            "SpeakerName" : "Deya",
+            "Text" : "I'm done with you. ►|",
+            "CharDelay" : ".05"
+        },
+        {
+            "SpeakerName" : "Nin",
+            "Text" : "^-^ ►|",
+            "CharDelay" : ".05"
+        }
+    ]
+    
+}

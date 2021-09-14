@@ -1,0 +1,375 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public enum Direction
+{ 
+    down = 0,
+    downleft = 1,
+    downright = 2,
+    left = 3,
+    right = 4,
+    up = 5,
+    upleft = 6,
+    upright = 7
+    
+}
+
+public enum State
+{ 
+    idle = 0,
+    running = 1,
+    dash = 2,
+    slash = 3
+}
+
+
+public class movement : MonoBehaviour
+{   
+    public Rigidbody rb;
+    public GameObject SpritePlane;
+
+    [Header("Player Properties")]
+    public float RunSpeed;
+    public float DashSpeed = 3;
+    public float FrictionPercent = .01f;
+
+    public Direction Direction = Direction.down;
+    public State CharacterState = State.idle;
+    public bool Invincible = false;
+
+    [Header("Object References")]
+    public GameObject Slash1;
+    public GameObject HurtVFX;
+    public GameObject DashParticleSystem;
+    public GameObject VFXAfterImage;
+
+    public Color DashTint;
+
+    private PlayerContolBridge PlayerActionControl;
+    private bool stun = false;
+    private Vector4 OriginalColor;
+    private Vector3 VelocityBuffer;
+    private bool IsPaused = false;
+
+
+    #region Unity Behaviors
+    private void Awake()
+    {
+        GlobalData.Player = gameObject;
+        PlayerActionControl = new PlayerContolBridge();
+        DashParticleSystem.GetComponent<ParticleSystem>().Stop();
+        VFXAfterImage.GetComponent<ParticleSystem>().Stop();
+        OriginalColor = SpritePlane.GetComponent<Renderer>().material.GetColor("_EmissionColor");
+
+
+
+    }
+    
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        
+        PlayerActionControl.InGame.Attack1.performed += _ => LightSlash();
+        PlayerActionControl.InGame.Dash.performed += _ => StartDash();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        // If game state is paused
+        if (!GlobalData.Locked)
+        {
+            if (IsPaused)
+            {
+                ExitPause();
+            }
+
+            Vector3 velocity = rb.velocity;
+            float VerticalInput = PlayerActionControl.InGame.Vertical.ReadValue<float>();
+            float HorizontalInput = PlayerActionControl.InGame.Horizontal.ReadValue<float>();
+            bool Attack1 = PlayerActionControl.InGame.Attack1.triggered;
+
+            Color LerpedColor = Vector4.Lerp(SpritePlane.GetComponent<Renderer>().material.color, OriginalColor, .1f);
+            SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", LerpedColor);
+            SpritePlane.GetComponent<Renderer>().material.color = LerpedColor;
+
+            // state checks
+            if (!stun)
+            {
+                // kinetic motion
+                if (State.slash != CharacterState && State.dash != CharacterState)
+                {
+                    // directino input-
+                    if (HorizontalInput != 0 && VerticalInput != 0)
+                    {
+                        rb.velocity = new Vector3(HorizontalInput * RunSpeed * (float)Math.Sqrt(.5), rb.velocity.y, VerticalInput * RunSpeed * (float)Math.Sqrt(.5));
+
+                        CharacterState = State.running;
+                    }
+                    else if (HorizontalInput != 0 || VerticalInput != 0)
+                    {
+                        rb.velocity = new Vector3(HorizontalInput * RunSpeed, rb.velocity.y, VerticalInput * RunSpeed);
+                        CharacterState = State.running;
+                    }
+                    else
+                    {
+                        rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), FrictionPercent);
+                        CharacterState = State.idle;
+                    }
+
+                    // set animation variables
+                    SetPlayerDirection(HorizontalInput, VerticalInput);
+                }
+            }
+        }
+        else 
+        {
+            if (!IsPaused)
+            {
+                EnterPause();
+            }
+         
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        //Damage From Enemies
+        if (other.tag == "Enemy")
+        {
+            DamagePlayer(other.transform.position);
+        }
+    }
+    private void OnEnable()
+    {
+        PlayerActionControl.Enable();
+
+    }
+    private void OnDisable()
+    {
+        PlayerActionControl.Disable();
+    }
+
+    #endregion
+
+    #region Player Actions
+    private void LightSlash()
+    {
+        if (!GlobalData.Locked)
+        {
+            if (CharacterState != State.slash || GlobalData.ComboCount > 0)
+            {
+                if (CharacterState != State.dash)
+                {
+                    EndDash();
+                }
+                CharacterState = State.slash;
+                rb.velocity = Vector3FromDirectionMagnitude(Direction, 10);
+                GameObject Attack = Instantiate(Slash1);
+                Attack.transform.position = transform.position + Vector3FromDirectionMagnitude(Direction, 1.5f);
+                Attack.transform.rotation = Quaternion.Euler(90, Attack.transform.rotation.y, AngleFromDirection(Direction));
+            }
+        }
+    }
+
+    private void StartDash()
+    {
+        Invincible = true;
+        if (CharacterState != State.slash && CharacterState != State.dash && GlobalData.DashUnlocked && !GlobalData.Locked)
+        {
+            
+            CharacterState = State.dash;
+            rb.useGravity = false;
+            rb.velocity = Vector3FromDirectionMagnitude(Direction, GlobalData.DashSpeed);
+            StartCoroutine("EndDash");//Invoke("EndDash", .20f);
+            
+            DashParticleSystem.GetComponent<ParticleSystem>().Play();
+            VFXAfterImage.GetComponent<ParticleSystem>().Play();
+            DashParticleSystem.transform.rotation = Quaternion.Euler(DashParticleSystem.transform.rotation.x, AngleFromDirection(Direction), DashParticleSystem.transform.rotation.z);
+            VFXAfterImage.GetComponent<ParticleSystemRenderer>().material.mainTexture = SpritePlane.GetComponent<CharacterRenderer>().dash.SpriteSheets[(int)Direction];
+            
+            SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", DashTint);
+            SpritePlane.GetComponent<Renderer>().material.color = DashTint;
+        }
+    }
+
+    IEnumerator EndDash()
+    {
+        yield return new WaitForSeconds(GlobalData.DashDuration);
+
+        rb.useGravity = true;
+        Invincible = false;
+        CharacterState = State.idle;
+        rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0,0,0), .5f);
+        DashParticleSystem.GetComponent<ParticleSystem>().Stop();
+        VFXAfterImage.GetComponent<ParticleSystem>().Stop();
+
+        //SpritePlane.GetComponent<Renderer>().material.color = OriginalColor;
+        //SpritePlane.GetComponent<Renderer>().material.SetColor("_EmissionColor", OriginalColor);
+    }
+
+    private void ResetStun()
+    {
+        stun = false;
+    }
+
+    #endregion
+
+    #region Utility Functions
+    private Vector3 Vector3FromDirectionMagnitude(Direction direction, float magnitude)
+    {
+        Vector3 result = new Vector3(0,0,0);
+        switch (direction)
+        {
+            case Direction.up:
+                result = new Vector3(0, 0, magnitude);
+
+                break;
+            case Direction.down:
+                result = new Vector3(0, 0, -magnitude);
+                break;
+
+            case Direction.left:
+                result = new Vector3(-magnitude, 0, 0);
+                break;
+
+            case Direction.right:
+                result = new Vector3(magnitude, 0, 0);
+                break;
+
+            case Direction.downleft:
+                result = new Vector3(-magnitude * (float)Math.Sqrt(.5), 0, -magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.downright:
+                result = new Vector3(magnitude * (float)Math.Sqrt(.5), 0, -magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.upleft:
+                result = new Vector3(-magnitude * (float)Math.Sqrt(.5), 0, magnitude * (float)Math.Sqrt(.5));
+                break;
+
+            case Direction.upright:
+                result = new Vector3(magnitude * (float)Math.Sqrt(.5), 0, magnitude * (float)Math.Sqrt(.5));
+                break;
+
+        }
+
+
+        return result;
+        
+    }
+
+    private void SetPlayerDirection( float HorizontalInput, float VerticalInput)
+    {
+        if (HorizontalInput > 0)
+        {
+
+            if (VerticalInput > 0)
+            {
+                Direction = Direction.upright;
+            }
+            else if (VerticalInput < 0)
+            {
+                Direction = Direction.downright;
+            }
+            else
+            {
+                Direction = Direction.right;
+            }
+        }
+        else if (HorizontalInput < 0)
+        {
+            if (VerticalInput > 0)
+            {
+                Direction = Direction.upleft;
+            }
+            else if (VerticalInput < 0)
+            {
+                Direction = Direction.downleft;
+            }
+            else
+            {
+                Direction = Direction.left;
+            }
+        }
+        else
+        {
+            if (VerticalInput > 0)
+            {
+                Direction = Direction.up;
+            }
+            else if (VerticalInput < 0)
+            {
+                Direction = Direction.down;
+            }
+        }
+    }
+
+    private float AngleFromDirection(Direction direction)
+    {
+        float angle = 0;
+
+        switch(direction)
+        {
+            case Direction.down:
+                angle = 270;
+                break;
+
+            case Direction.downleft:
+                angle = 225;
+                break;
+            case Direction.downright:
+                angle = 315;
+                break;
+            case Direction.left:
+                angle = 180;
+                break;
+            case Direction.right:
+                angle = 0;
+                break;
+            case Direction.up:
+                angle = 90;
+                break;
+            case Direction.upleft:
+                angle = 135;
+                break;
+            case Direction.upright:
+                angle = 45;
+                break;
+
+        }
+
+        return angle;
+    }
+
+    private void DamagePlayer(Vector3 collisionPoint)
+    {
+        if (!stun)
+        {
+            stun = true;
+            Invoke("ResetStun", .3f);
+            rb.velocity = Vector3.MoveTowards(transform.position, collisionPoint, -40) - transform.position;
+            GlobalData.Health--;
+            
+        }
+    }
+
+    private void EnterPause()
+    {
+        VelocityBuffer = rb.velocity;
+        rb.isKinematic = true;
+        IsPaused = true;
+    }
+
+    private void ExitPause()
+    {
+        rb.velocity = VelocityBuffer;
+        rb.isKinematic = false;
+        IsPaused = false;
+    }
+
+    #endregion
+}
